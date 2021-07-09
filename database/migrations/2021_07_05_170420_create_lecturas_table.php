@@ -127,7 +127,8 @@ class CreateLecturasTable extends Migration
             $table->string('manzana');
             $table->string('lote');
             $table->string('imagen');
-            $table->foreignId('periodo_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->string('periodo_inicio');
+            $table->string('periodo_fin');
             $table->foreignId('urbanizacion_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
             $table->engine = 'InnoDB';

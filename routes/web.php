@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LecturaController;
+use App\Http\Controllers\UrbanizacionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,14 +23,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Auth::routes();
+// Route::resource('/lectura', [App\Http\Controllers\LecturaController::class])->name('lectura');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('lectura', LecturaController::class);
+Route::resource('urbanizacion', UrbanizacionController::class);

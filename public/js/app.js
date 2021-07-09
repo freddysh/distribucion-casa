@@ -17945,545 +17945,549 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
     var busqueda = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
-      urbanizacion: '',
-      manzana: '',
-      lote: '',
+      urbanizacion: "",
+      manzana: "",
+      lote: "",
       anioActual: new Date().getFullYear()
     });
     var distribucion = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
-      manzana: 'A',
-      lote: '5',
-      urbanizacion_id: '',
-      periodo_id: '',
+      manzana: "A",
+      lote: "5",
+      urbanizacion_id: "",
+      periodo_inicio: new Date().getFullYear() - 1,
+      periodo_fin: new Date().getFullYear(),
       celdas: [{
-        nombre: 'Primera planta',
+        nombre: "Primera planta",
         celda_a: {
-          nombre: 'celda_a',
-          valor: ''
+          nombre: "celda_a",
+          valor: ""
         },
         celda_b: {
-          nombre: 'celda_b',
-          valor: ''
+          nombre: "celda_b",
+          valor: ""
         },
         celda_c: {
-          nombre: 'celda_c',
-          valor: ''
+          nombre: "celda_c",
+          valor: ""
         },
         celda_d: {
-          nombre: 'celda_d',
-          valor: ''
+          nombre: "celda_d",
+          valor: ""
         },
         celda_e: {
-          nombre: 'celda_e',
-          valor: ''
+          nombre: "celda_e",
+          valor: ""
         },
         celda_f: {
-          nombre: 'celda_f',
-          valor: ''
+          nombre: "celda_f",
+          valor: ""
         },
         celda_g: {
-          nombre: 'celda_g',
-          valor: ''
+          nombre: "celda_g",
+          valor: ""
         },
         celda_h: {
-          nombre: 'celda_h',
-          valor: ''
+          nombre: "celda_h",
+          valor: ""
         },
         celda_i: {
-          nombre: 'celda_i',
-          valor: ''
+          nombre: "celda_i",
+          valor: ""
         },
         celda_j: {
-          nombre: 'celda_j',
-          valor: ''
+          nombre: "celda_j",
+          valor: ""
         },
         celda_k: {
-          nombre: 'celda_k',
-          valor: ''
+          nombre: "celda_k",
+          valor: ""
         },
         celda_l: {
-          nombre: 'celda_l',
-          valor: ''
+          nombre: "celda_l",
+          valor: ""
         },
         celda_m: {
-          nombre: 'celda_m',
-          valor: ''
+          nombre: "celda_m",
+          valor: ""
         },
         celda_n: {
-          nombre: 'celda_n',
-          valor: ''
+          nombre: "celda_n",
+          valor: ""
         },
         celda_o: {
-          nombre: 'celda_o',
-          valor: ''
+          nombre: "celda_o",
+          valor: ""
         },
         celda_p: {
-          nombre: 'celda_p',
-          valor: ''
+          nombre: "celda_p",
+          valor: ""
         },
         celda_q: {
-          nombre: 'celda_q',
-          valor: ''
+          nombre: "celda_q",
+          valor: ""
         },
         celda_r: {
-          nombre: 'celda_r',
-          valor: ''
+          nombre: "celda_r",
+          valor: ""
         },
         celda_s: {
-          nombre: 'celda_s',
-          valor: ''
+          nombre: "celda_s",
+          valor: ""
         },
         celda_t: {
-          nombre: 'celda_t',
-          valor: ''
+          nombre: "celda_t",
+          valor: ""
         },
         celda_u: {
-          nombre: 'celda_u',
-          valor: ''
+          nombre: "celda_u",
+          valor: ""
         },
         celda_v: {
-          nombre: 'celda_v',
-          valor: ''
+          nombre: "celda_v",
+          valor: ""
         },
         celda_w: {
-          nombre: 'celda_w',
-          valor: ''
+          nombre: "celda_w",
+          valor: ""
         },
         celda_x: {
-          nombre: 'celda_x',
-          valor: ''
+          nombre: "celda_x",
+          valor: ""
         },
         celda_y: {
-          nombre: 'celda_y',
-          valor: ''
+          nombre: "celda_y",
+          valor: ""
         },
         celda_z: {
-          nombre: 'celda_z',
-          valor: ''
+          nombre: "celda_z",
+          valor: ""
         },
         celda_aa: {
-          nombre: 'celda_aa',
-          valor: ''
+          nombre: "celda_aa",
+          valor: ""
         },
         celda_ab: {
-          nombre: 'celda_ab',
-          valor: ''
+          nombre: "celda_ab",
+          valor: ""
         },
         celda_ac: {
-          nombre: 'celda_ac',
-          valor: ''
+          nombre: "celda_ac",
+          valor: ""
         },
         celda_ad: {
-          nombre: 'celda_ad',
-          valor: ''
+          nombre: "celda_ad",
+          valor: ""
         },
         celda_ae: {
-          nombre: 'celda_ae',
-          valor: ''
+          nombre: "celda_ae",
+          valor: ""
         },
         celda_af: {
-          nombre: 'celda_af',
-          valor: ''
+          nombre: "celda_af",
+          valor: ""
         },
         celda_ag: {
-          nombre: 'celda_ag',
-          valor: ''
+          nombre: "celda_ag",
+          valor: ""
         },
         celda_ah: {
-          nombre: 'celda_ah',
-          valor: ''
+          nombre: "celda_ah",
+          valor: ""
         },
         celda_ai: {
-          nombre: 'celda_ai',
-          valor: ''
+          nombre: "celda_ai",
+          valor: ""
         },
         celda_aj: {
-          nombre: 'celda_aj',
-          valor: ''
+          nombre: "celda_aj",
+          valor: ""
         }
       }, {
-        nombre: 'Segunda planta',
+        nombre: "Segunda planta",
         celda_a: {
-          nombre: 'celda_a',
-          valor: ''
+          nombre: "celda_a",
+          valor: ""
         },
         celda_b: {
-          nombre: 'celda_b',
-          valor: ''
+          nombre: "celda_b",
+          valor: ""
         },
         celda_c: {
-          nombre: 'celda_c',
-          valor: ''
+          nombre: "celda_c",
+          valor: ""
         },
         celda_d: {
-          nombre: 'celda_d',
-          valor: ''
+          nombre: "celda_d",
+          valor: ""
         },
         celda_e: {
-          nombre: 'celda_e',
-          valor: ''
+          nombre: "celda_e",
+          valor: ""
         },
         celda_f: {
-          nombre: 'celda_f',
-          valor: ''
+          nombre: "celda_f",
+          valor: ""
         },
         celda_g: {
-          nombre: 'celda_g',
-          valor: ''
+          nombre: "celda_g",
+          valor: ""
         },
         celda_h: {
-          nombre: 'celda_h',
-          valor: ''
+          nombre: "celda_h",
+          valor: ""
         },
         celda_i: {
-          nombre: 'celda_i',
-          valor: ''
+          nombre: "celda_i",
+          valor: ""
         },
         celda_j: {
-          nombre: 'celda_j',
-          valor: ''
+          nombre: "celda_j",
+          valor: ""
         },
         celda_k: {
-          nombre: 'celda_k',
-          valor: ''
+          nombre: "celda_k",
+          valor: ""
         },
         celda_l: {
-          nombre: 'celda_l',
-          valor: ''
+          nombre: "celda_l",
+          valor: ""
         },
         celda_m: {
-          nombre: 'celda_m',
-          valor: ''
+          nombre: "celda_m",
+          valor: ""
         },
         celda_n: {
-          nombre: 'celda_n',
-          valor: ''
+          nombre: "celda_n",
+          valor: ""
         },
         celda_o: {
-          nombre: 'celda_o',
-          valor: ''
+          nombre: "celda_o",
+          valor: ""
         },
         celda_p: {
-          nombre: 'celda_p',
-          valor: ''
+          nombre: "celda_p",
+          valor: ""
         },
         celda_q: {
-          nombre: 'celda_q',
-          valor: ''
+          nombre: "celda_q",
+          valor: ""
         },
         celda_r: {
-          nombre: 'celda_r',
-          valor: ''
+          nombre: "celda_r",
+          valor: ""
         },
         celda_s: {
-          nombre: 'celda_s',
-          valor: ''
+          nombre: "celda_s",
+          valor: ""
         },
         celda_t: {
-          nombre: 'celda_t',
-          valor: ''
+          nombre: "celda_t",
+          valor: ""
         },
         celda_u: {
-          nombre: 'celda_u',
-          valor: ''
+          nombre: "celda_u",
+          valor: ""
         },
         celda_v: {
-          nombre: 'celda_v',
-          valor: ''
+          nombre: "celda_v",
+          valor: ""
         },
         celda_w: {
-          nombre: 'celda_w',
-          valor: ''
+          nombre: "celda_w",
+          valor: ""
         },
         celda_x: {
-          nombre: 'celda_x',
-          valor: ''
+          nombre: "celda_x",
+          valor: ""
         },
         celda_y: {
-          nombre: 'celda_y',
-          valor: ''
+          nombre: "celda_y",
+          valor: ""
         },
         celda_z: {
-          nombre: 'celda_z',
-          valor: ''
+          nombre: "celda_z",
+          valor: ""
         },
         celda_aa: {
-          nombre: 'celda_aa',
-          valor: ''
+          nombre: "celda_aa",
+          valor: ""
         },
         celda_ab: {
-          nombre: 'celda_ab',
-          valor: ''
+          nombre: "celda_ab",
+          valor: ""
         },
         celda_ac: {
-          nombre: 'celda_ac',
-          valor: ''
+          nombre: "celda_ac",
+          valor: ""
         },
         celda_ad: {
-          nombre: 'celda_ad',
-          valor: ''
+          nombre: "celda_ad",
+          valor: ""
         },
         celda_ae: {
-          nombre: 'celda_ae',
-          valor: ''
+          nombre: "celda_ae",
+          valor: ""
         },
         celda_af: {
-          nombre: 'celda_af',
-          valor: ''
+          nombre: "celda_af",
+          valor: ""
         },
         celda_ag: {
-          nombre: 'celda_ag',
-          valor: ''
+          nombre: "celda_ag",
+          valor: ""
         },
         celda_ah: {
-          nombre: 'celda_ah',
-          valor: ''
+          nombre: "celda_ah",
+          valor: ""
         },
         celda_ai: {
-          nombre: 'celda_ai',
-          valor: ''
+          nombre: "celda_ai",
+          valor: ""
         },
         celda_aj: {
-          nombre: 'celda_aj',
-          valor: ''
+          nombre: "celda_aj",
+          valor: ""
         }
       }, {
-        nombre: 'Tercera planta',
+        nombre: "Tercera planta",
         celda_a: {
-          nombre: 'celda_a',
-          valor: ''
+          nombre: "celda_a",
+          valor: ""
         },
         celda_b: {
-          nombre: 'celda_b',
-          valor: ''
+          nombre: "celda_b",
+          valor: ""
         },
         celda_c: {
-          nombre: 'celda_c',
-          valor: ''
+          nombre: "celda_c",
+          valor: ""
         },
         celda_d: {
-          nombre: 'celda_d',
-          valor: ''
+          nombre: "celda_d",
+          valor: ""
         },
         celda_e: {
-          nombre: 'celda_e',
-          valor: ''
+          nombre: "celda_e",
+          valor: ""
         },
         celda_f: {
-          nombre: 'celda_f',
-          valor: ''
+          nombre: "celda_f",
+          valor: ""
         },
         celda_g: {
-          nombre: 'celda_g',
-          valor: ''
+          nombre: "celda_g",
+          valor: ""
         },
         celda_h: {
-          nombre: 'celda_h',
-          valor: ''
+          nombre: "celda_h",
+          valor: ""
         },
         celda_i: {
-          nombre: 'celda_i',
-          valor: ''
+          nombre: "celda_i",
+          valor: ""
         },
         celda_j: {
-          nombre: 'celda_j',
-          valor: ''
+          nombre: "celda_j",
+          valor: ""
         },
         celda_k: {
-          nombre: 'celda_k',
-          valor: ''
+          nombre: "celda_k",
+          valor: ""
         },
         celda_l: {
-          nombre: 'celda_l',
-          valor: ''
+          nombre: "celda_l",
+          valor: ""
         },
         celda_m: {
-          nombre: 'celda_m',
-          valor: ''
+          nombre: "celda_m",
+          valor: ""
         },
         celda_n: {
-          nombre: 'celda_n',
-          valor: ''
+          nombre: "celda_n",
+          valor: ""
         },
         celda_o: {
-          nombre: 'celda_o',
-          valor: ''
+          nombre: "celda_o",
+          valor: ""
         },
         celda_p: {
-          nombre: 'celda_p',
-          valor: ''
+          nombre: "celda_p",
+          valor: ""
         },
         celda_q: {
-          nombre: 'celda_q',
-          valor: ''
+          nombre: "celda_q",
+          valor: ""
         },
         celda_r: {
-          nombre: 'celda_r',
-          valor: ''
+          nombre: "celda_r",
+          valor: ""
         },
         celda_s: {
-          nombre: 'celda_s',
-          valor: ''
+          nombre: "celda_s",
+          valor: ""
         },
         celda_t: {
-          nombre: 'celda_t',
-          valor: ''
+          nombre: "celda_t",
+          valor: ""
         },
         celda_u: {
-          nombre: 'celda_u',
-          valor: ''
+          nombre: "celda_u",
+          valor: ""
         },
         celda_v: {
-          nombre: 'celda_v',
-          valor: ''
+          nombre: "celda_v",
+          valor: ""
         },
         celda_w: {
-          nombre: 'celda_w',
-          valor: ''
+          nombre: "celda_w",
+          valor: ""
         },
         celda_x: {
-          nombre: 'celda_x',
-          valor: ''
+          nombre: "celda_x",
+          valor: ""
         },
         celda_y: {
-          nombre: 'celda_y',
-          valor: ''
+          nombre: "celda_y",
+          valor: ""
         },
         celda_z: {
-          nombre: 'celda_z',
-          valor: ''
+          nombre: "celda_z",
+          valor: ""
         },
         celda_aa: {
-          nombre: 'celda_aa',
-          valor: ''
+          nombre: "celda_aa",
+          valor: ""
         },
         celda_ab: {
-          nombre: 'celda_ab',
-          valor: ''
+          nombre: "celda_ab",
+          valor: ""
         },
         celda_ac: {
-          nombre: 'celda_ac',
-          valor: ''
+          nombre: "celda_ac",
+          valor: ""
         },
         celda_ad: {
-          nombre: 'celda_ad',
-          valor: ''
+          nombre: "celda_ad",
+          valor: ""
         },
         celda_ae: {
-          nombre: 'celda_ae',
-          valor: ''
+          nombre: "celda_ae",
+          valor: ""
         },
         celda_af: {
-          nombre: 'celda_af',
-          valor: ''
+          nombre: "celda_af",
+          valor: ""
         },
         celda_ag: {
-          nombre: 'celda_ag',
-          valor: ''
+          nombre: "celda_ag",
+          valor: ""
         },
         celda_ah: {
-          nombre: 'celda_ah',
-          valor: ''
+          nombre: "celda_ah",
+          valor: ""
         },
         celda_ai: {
-          nombre: 'celda_ai',
-          valor: ''
+          nombre: "celda_ai",
+          valor: ""
         },
         celda_aj: {
-          nombre: 'celda_aj',
-          valor: ''
+          nombre: "celda_aj",
+          valor: ""
         }
       }]
     });
     var espacios = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([{
-      id: '0',
-      color: 'bg-white',
-      nombre: 'Clic para borar'
+      id: "0",
+      color: "bg-white",
+      nombre: "Clic para borar"
     }, {
-      id: '1',
-      color: 'bg-danger',
-      nombre: 'Sala/comedor'
+      id: "1",
+      color: "bg-danger",
+      nombre: "Sala/comedor"
     }, {
-      id: '2',
-      color: 'bg-success',
-      nombre: 'Cocina'
+      id: "2",
+      color: "bg-success",
+      nombre: "Cocina"
     }, {
-      id: '3',
-      color: 'bg-secondary',
-      nombre: 'Dormitorio'
+      id: "3",
+      color: "bg-secondary",
+      nombre: "Dormitorio"
     }, {
-      id: '4',
-      color: 'bg-info',
-      nombre: 'Baño'
+      id: "4",
+      color: "bg-info",
+      nombre: "Baño"
     }, {
-      id: '5',
-      color: 'bg-dark',
-      nombre: 'Otro (techado)'
+      id: "5",
+      color: "bg-dark",
+      nombre: "Otro (techado)"
     }, {
-      id: '6',
-      color: 'bg-warning',
-      nombre: 'Otro/Ninguno (sin techar)'
+      id: "6",
+      color: "bg-warning",
+      nombre: "Otro/Ninguno (sin techar)"
     }]);
     var urbanizaciones = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)([{
-      id: '1',
-      nombre: 'TAWANTNSUYO'
+      id: "1",
+      nombre: "TAWANTNSUYO"
     }, {
-      id: '2',
-      nombre: 'KARIGRANDE'
+      id: "2",
+      nombre: "KARIGRANDE"
     }, {
-      id: '3',
-      nombre: 'SAN LUIS'
+      id: "3",
+      nombre: "SAN LUIS"
     }, {
-      id: '4',
-      nombre: 'LOS INCAS'
+      id: "4",
+      nombre: "LOS INCAS"
     }, {
-      id: '5',
-      nombre: 'AGUA BUENA'
+      id: "5",
+      nombre: "AGUA BUENA"
     }, {
-      id: '6',
-      nombre: 'SAJUAN'
+      id: "6",
+      nombre: "SAJUAN"
     }]);
     var espacio = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({
-      id: ''
+      id: ""
     });
 
     function recojerColor(espacioEscojido) {
       espacio.value = espacioEscojido;
-      console.log('celdaCurrent', espacio.value.id);
+      console.log("celdaCurrent", espacio.value.id);
     }
-
-    ;
 
     function asignarColor(celdaPicada, index) {
       if (!espacio.value) {
-        alert('Escoja un color de la lista');
+        alert("Escoja un color de la lista");
       }
 
       distribucion.value.celdas[index][celdaPicada].valor = espacio.value.id;
     }
 
-    ;
-
     function mostrarValor(id) {
       return espacios.value.map(function (fila) {
-        return fila.id == id ? fila.color : '';
+        return fila.id == id ? fila.color : "";
       });
     }
 
-    ;
-
     function ponerAnio(operacion) {
-      if (operacion == '+') {
+      if (operacion == "+") {
         busqueda.value.anioActual = busqueda.value.anioActual + 2;
-      } else if (operacion == '-') {
+        distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
+        distribucion.value.periodo_fin = busqueda.value.anioActual;
+      } else if (operacion == "-") {
         busqueda.value.anioActual = busqueda.value.anioActual - 2;
+        distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
+        distribucion.value.periodo_fin = busqueda.value.anioActual;
       } // busqueda.value.anioActual=anioActual.value-1+'/'+anioActual.value
       // anioAnteriorTexto.value=anioActual.value-2+'/'+anioActual.value-1
       // anioPosteriorTexto.value=anioActual.value+1+'/'+anioActual.value+2
 
     }
 
-    ;
+    function guardar() {
+      axios.post("lectura", distribucion).then(function (res) {
+        console.log("tag", res);
+      });
+    }
+
     return {
       distribucion: distribucion,
       urbanizaciones: urbanizaciones,
@@ -18496,7 +18500,8 @@ __webpack_require__.r(__webpack_exports__);
       // anioActual,
       // anioAnteriorTexto,
       // anioPosteriorTexto,
-      ponerAnio: ponerAnio
+      ponerAnio: ponerAnio,
+      guardar: guardar
     };
   }
 });
@@ -18662,7 +18667,7 @@ var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_28 = {
-  "class": "col-sm-12 col-md-9"
+  "class": "col-sm-12 col-md-7"
 };
 var _hoisted_29 = {
   "class": "card"
@@ -18687,25 +18692,34 @@ var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 );
 
 var _hoisted_35 = {
-  "class": "col-sm-12 col-md-2 text-center"
+  "class": "col-sm12 col-md-12"
+};
+var _hoisted_36 = {
+  "class": "col-sm-12 col-md-2"
+};
+var _hoisted_37 = {
+  "class": "card"
+};
+var _hoisted_38 = {
+  "class": "card-body"
 };
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Años", -1
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, "Años", -1
 /* HOISTED */
 );
 
-var _hoisted_37 = {
+var _hoisted_40 = {
   "class": "row"
 };
-var _hoisted_38 = {
+var _hoisted_41 = {
   "class": "col-12"
 };
 
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "16",
   height: "16",
@@ -18718,17 +18732,17 @@ var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_41 = {
+var _hoisted_44 = {
   "class": "col-12"
 };
-var _hoisted_42 = {
+var _hoisted_45 = {
   "class": "btn btn-primary btn-block btn-lg"
 };
-var _hoisted_43 = {
+var _hoisted_46 = {
   "class": "col-12"
 };
 
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "16",
   height: "16",
@@ -18741,7 +18755,7 @@ var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(
 /* HOISTED */
 );
 
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
+var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("br", null, null, -1
 /* HOISTED */
 );
 
@@ -18785,7 +18799,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[1] || (_cache[1] = function ($event) {
       return _ctx.buscarLectura();
     })
-  }, [_hoisted_15, _hoisted_16])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, "Periodo actual: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.busqueda.anioActual - 1 + '/' + $setup.busqueda.anioActual), 1
+  }, [_hoisted_15, _hoisted_16])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, "Periodo actual: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.distribucion.periodo_inicio + '/' + $setup.distribucion.periodo_fin), 1
   /* TEXT */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [_hoisted_23, _hoisted_24, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.espacios, function (espacio_, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
@@ -19062,23 +19076,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["onClick"])])]), _hoisted_34]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-    "class": "btn btn-secondary btn-block btn-lg",
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    "class": "btn btn-block btn-primary",
     onClick: _cache[2] || (_cache[2] = function ($event) {
+      return $setup.guardar();
+    })
+  }, "Guardar")])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    "class": "btn btn-secondary btn-block btn-lg",
+    onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.ponerAnio('-');
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.busqueda.anioActual - 3 + '/' + ($setup.busqueda.anioActual - 2)), 1
   /* TEXT */
-  ), _hoisted_39, _hoisted_40])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.busqueda.anioActual - 1 + '/' + $setup.busqueda.anioActual), 1
+  ), _hoisted_42, _hoisted_43])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", _hoisted_45, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.busqueda.anioActual - 1 + '/' + $setup.busqueda.anioActual), 1
   /* TEXT */
-  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-secondary btn-block btn-lg",
-    onClick: _cache[3] || (_cache[3] = function ($event) {
+    onClick: _cache[4] || (_cache[4] = function ($event) {
       return $setup.ponerAnio('+');
     })
-  }, [_hoisted_44, _hoisted_45, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.busqueda.anioActual + 1 + '/' + ($setup.busqueda.anioActual + 2)), 1
+  }, [_hoisted_47, _hoisted_48, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.busqueda.anioActual + 1 + '/' + ($setup.busqueda.anioActual + 2)), 1
   /* TEXT */
-  )])])])])])])])])])])])]);
+  )])])])])])])])])])]);
 }
 
 /***/ }),
