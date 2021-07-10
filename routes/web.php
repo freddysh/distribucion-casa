@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LecturaController;
 use App\Http\Controllers\UrbanizacionController;
+use App\Http\Controllers\EspacioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +27,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::resource('/lectura', [App\Http\Controllers\LecturaController::class])->name('lectura');
 
 Route::resource('lectura', LecturaController::class);
+Route::post('lectura-buscar', [LecturaController::class,'buscar'])->name('lectura.buscar');
 Route::resource('urbanizacion', UrbanizacionController::class);
+Route::resource('espacio', EspacioController::class);
+

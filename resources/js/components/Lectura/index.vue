@@ -13,7 +13,7 @@
                 class="form-control"
                 name="urbanizacion"
                 id="urbanizacion"
-                :value="busqueda.urbanizacion"
+                v-model="busqueda.urbanizacion"
               >
                 <option
                   v-for="(urb,index) in urbanizaciones"
@@ -32,7 +32,7 @@
                 name="manzana"
                 id="manzana"
                 placeholder="Ejemlo: A"
-                :value="busqueda.manzana"
+                v-model="busqueda.manzana"
               >
             </div>
           </div>
@@ -45,7 +45,7 @@
                 name="lote"
                 id="lote"
                 placeholder="Ejemlo: 5"
-                :value="busqueda.lote"
+                v-model="busqueda.lote"
               >
             </div>
           </div>
@@ -107,7 +107,7 @@
               <div class="card-body">
                 <div class="row">
                   <div
-                    class="col-sm-12 col-md-3"
+                    class="col-sm-12 col-md-4"
                     v-for="(celda,index) in distribucion.celdas"
                     :key="index"
                   >
@@ -116,170 +116,177 @@
                       <tr>
                         <td
                           class="cur"
-                          @click="asignarColor(celda.celda_a.nombre,index)"
-                          :class="mostrarValor(celda.celda_a.valor)"
+                          @click="asignarColor('celda_a',index)"
+                          :class="mostrarValor(celda.celda_a)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_b.nombre,index)"
-                          :class="mostrarValor(celda.celda_b.valor)"
+                          @click="asignarColor('celda_b',index)"
+                          :class="mostrarValor(celda.celda_b)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_c.nombre,index)"
-                          :class="mostrarValor(celda.celda_c.valor)"
+                          @click="asignarColor('celda_c',index)"
+                          :class="mostrarValor(celda.celda_c)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_d.nombre,index)"
-                          :class="mostrarValor(celda.celda_d.valor)"
+                          @click="asignarColor('celda_d',index)"
+                          :class="mostrarValor(celda.celda_d)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_e.nombre,index)"
-                          :class="mostrarValor(celda.celda_e.valor)"
+                          @click="asignarColor('celda_e',index)"
+                          :class="mostrarValor(celda.celda_e)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_f.nombre,index)"
-                          :class="mostrarValor(celda.celda_f.valor)"
-                        ></td>
-                      </tr>
-                      <tr>
-                        <td
-                          @click="asignarColor(celda.celda_g.nombre,index)"
-                          :class="mostrarValor(celda.celda_g.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_h.nombre,index)"
-                          :class="mostrarValor(celda.celda_h.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_i.nombre,index)"
-                          :class="mostrarValor(celda.celda_i.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_j.nombre,index)"
-                          :class="mostrarValor(celda.celda_j.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_k.nombre,index)"
-                          :class="mostrarValor(celda.celda_k.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_l.nombre,index)"
-                          :class="mostrarValor(celda.celda_l.valor)"
+                          @click="asignarColor('celda_f',index)"
+                          :class="mostrarValor(celda.celda_f)"
                         ></td>
                       </tr>
                       <tr>
                         <td
-                          @click="asignarColor(celda.celda_m.nombre,index)"
-                          :class="mostrarValor(celda.celda_m.valor)"
+                          @click="asignarColor('celda_g',index)"
+                          :class="mostrarValor(celda.celda_g)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_n.nombre,index)"
-                          :class="mostrarValor(celda.celda_n.valor)"
+                          @click="asignarColor('celda_h',index)"
+                          :class="mostrarValor(celda.celda_h)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_o.nombre,index)"
-                          :class="mostrarValor(celda.celda_o.valor)"
+                          @click="asignarColor('celda_i',index)"
+                          :class="mostrarValor(celda.celda_i)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_p.nombre,index)"
-                          :class="mostrarValor(celda.celda_p.valor)"
+                          @click="asignarColor('celda_j',index)"
+                          :class="mostrarValor(celda.celda_j)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_q.nombre,index)"
-                          :class="mostrarValor(celda.celda_q.valor)"
+                          @click="asignarColor('celda_k',index)"
+                          :class="mostrarValor(celda.celda_k)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_r.nombre,index)"
-                          :class="mostrarValor(celda.celda_r.valor)"
-                        ></td>
-                      </tr>
-                      <tr>
-                        <td
-                          @click="asignarColor(celda.celda_s.nombre,index)"
-                          :class="mostrarValor(celda.celda_s.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_t.nombre,index)"
-                          :class="mostrarValor(celda.celda_t.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_u.nombre,index)"
-                          :class="mostrarValor(celda.celda_u.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_v.nombre,index)"
-                          :class="mostrarValor(celda.celda_v.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_w.nombre,index)"
-                          :class="mostrarValor(celda.celda_w.valor)"
-                        ></td>
-                        <td
-                          @click="asignarColor(celda.celda_x.nombre,index)"
-                          :class="mostrarValor(celda.celda_x.valor)"
+                          @click="asignarColor('celda_l',index)"
+                          :class="mostrarValor(celda.celda_l)"
                         ></td>
                       </tr>
                       <tr>
                         <td
-                          @click="asignarColor(celda.celda_y.nombre,index)"
-                          :class="mostrarValor(celda.celda_y.valor)"
+                          @click="asignarColor('celda_m',index)"
+                          :class="mostrarValor(celda.celda_m)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_z.nombre,index)"
-                          :class="mostrarValor(celda.celda_z.valor)"
+                          @click="asignarColor('celda_n',index)"
+                          :class="mostrarValor(celda.celda_n)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_aa.nombre,index)"
-                          :class="mostrarValor(celda.celda_aa.valor)"
+                          @click="asignarColor('celda_o',index)"
+                          :class="mostrarValor(celda.celda_o)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_ab.nombre,index)"
-                          :class="mostrarValor(celda.celda_ab.valor)"
+                          @click="asignarColor('celda_p',index)"
+                          :class="mostrarValor(celda.celda_p)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_ac.nombre,index)"
-                          :class="mostrarValor(celda.celda_ac.valor)"
+                          @click="asignarColor('celda_q',index)"
+                          :class="mostrarValor(celda.celda_q)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_ad.nombre,index)"
-                          :class="mostrarValor(celda.celda_ad.valor)"
+                          @click="asignarColor('celda_r',index)"
+                          :class="mostrarValor(celda.celda_r)"
                         ></td>
                       </tr>
                       <tr>
                         <td
-                          @click="asignarColor(celda.celda_ae.nombre,index)"
-                          :class="mostrarValor(celda.celda_ae.valor)"
+                          @click="asignarColor('celda_s',index)"
+                          :class="mostrarValor(celda.celda_s)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_af.nombre,index)"
-                          :class="mostrarValor(celda.celda_af.valor)"
+                          @click="asignarColor('celda_t',index)"
+                          :class="mostrarValor(celda.celda_t)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_ag.nombre,index)"
-                          :class="mostrarValor(celda.celda_ag.valor)"
+                          @click="asignarColor('celda_u',index)"
+                          :class="mostrarValor(celda.celda_u)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_ah.nombre,index)"
-                          :class="mostrarValor(celda.celda_ah.valor)"
+                          @click="asignarColor('celda_v',index)"
+                          :class="mostrarValor(celda.celda_v)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_ai.nombre,index)"
-                          :class="mostrarValor(celda.celda_ai.valor)"
+                          @click="asignarColor('celda_w',index)"
+                          :class="mostrarValor(celda.celda_w)"
                         ></td>
                         <td
-                          @click="asignarColor(celda.celda_aj.nombre,index)"
-                          :class="mostrarValor(celda.celda_aj.valor)"
+                          @click="asignarColor('celda_x',index)"
+                          :class="mostrarValor(celda.celda_x)"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td
+                          @click="asignarColor('celda_y',index)"
+                          :class="mostrarValor(celda.celda_y)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_z',index)"
+                          :class="mostrarValor(celda.celda_z)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_aa',index)"
+                          :class="mostrarValor(celda.celda_aa)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ab',index)"
+                          :class="mostrarValor(celda.celda_ab)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ac',index)"
+                          :class="mostrarValor(celda.celda_ac)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ad',index)"
+                          :class="mostrarValor(celda.celda_ad)"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td
+                          @click="asignarColor('celda_ae',index)"
+                          :class="mostrarValor(celda.celda_ae)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_af',index)"
+                          :class="mostrarValor(celda.celda_af)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ag',index)"
+                          :class="mostrarValor(celda.celda_ag)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ah',index)"
+                          :class="mostrarValor(celda.celda_ah)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ai',index)"
+                          :class="mostrarValor(celda.celda_ai)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_aj',index)"
+                          :class="mostrarValor(celda.celda_aj)"
                         ></td>
                       </tr>
                     </table>
-                    <span class="text-center">
-                      ------------- Calle ------------
-                    </span>
+                    <div class="row">
+                      <div class="col-12 text-center">
+                        <span>
+                          === Calle ===
+                        </span>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-sm12 col-md-12">
                     <button
-                      class="btn btn-block btn-primary"
+                      class="btn btn-block"
+                      :class="distribucion.id==0?'btn-primary':'btn-warning'"
                       @click="guardar()"
-                    >Guardar</button>
+                    >
+                      {{ distribucion.id==0?'Guardar':'Editar' }}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -340,7 +347,7 @@
   </div>
 </template>
 <script>
-import { computed, reactive, ref, toRefs } from "vue";
+import { computed, reactive, ref, toRefs, onMounted } from "vue";
 export default {
   setup() {
     const busqueda = ref({
@@ -348,150 +355,258 @@ export default {
       manzana: "",
       lote: "",
       anioActual: new Date().getFullYear(),
+      periodo_inicio: new Date().getFullYear() - 1,
+      periodo_fin: new Date().getFullYear(),
     });
     const distribucion = ref({
-      manzana: "A",
-      lote: "5",
-      urbanizacion_id: "",
+      id: 0,
+      manzana: "",
+      lote: "",
+      urbanizacion_id: "0",
       periodo_inicio: new Date().getFullYear() - 1,
       periodo_fin: new Date().getFullYear(),
       celdas: [
         {
           nombre: "Primera planta",
-          celda_a: { nombre: "celda_a", valor: "" },
-          celda_b: { nombre: "celda_b", valor: "" },
-          celda_c: { nombre: "celda_c", valor: "" },
-          celda_d: { nombre: "celda_d", valor: "" },
-          celda_e: { nombre: "celda_e", valor: "" },
-          celda_f: { nombre: "celda_f", valor: "" },
-          celda_g: { nombre: "celda_g", valor: "" },
-          celda_h: { nombre: "celda_h", valor: "" },
-          celda_i: { nombre: "celda_i", valor: "" },
-          celda_j: { nombre: "celda_j", valor: "" },
-          celda_k: { nombre: "celda_k", valor: "" },
-          celda_l: { nombre: "celda_l", valor: "" },
-          celda_m: { nombre: "celda_m", valor: "" },
-          celda_n: { nombre: "celda_n", valor: "" },
-          celda_o: { nombre: "celda_o", valor: "" },
-          celda_p: { nombre: "celda_p", valor: "" },
-          celda_q: { nombre: "celda_q", valor: "" },
-          celda_r: { nombre: "celda_r", valor: "" },
-          celda_s: { nombre: "celda_s", valor: "" },
-          celda_t: { nombre: "celda_t", valor: "" },
-          celda_u: { nombre: "celda_u", valor: "" },
-          celda_v: { nombre: "celda_v", valor: "" },
-          celda_w: { nombre: "celda_w", valor: "" },
-          celda_x: { nombre: "celda_x", valor: "" },
-          celda_y: { nombre: "celda_y", valor: "" },
-          celda_z: { nombre: "celda_z", valor: "" },
-          celda_aa: { nombre: "celda_aa", valor: "" },
-          celda_ab: { nombre: "celda_ab", valor: "" },
-          celda_ac: { nombre: "celda_ac", valor: "" },
-          celda_ad: { nombre: "celda_ad", valor: "" },
-          celda_ae: { nombre: "celda_ae", valor: "" },
-          celda_af: { nombre: "celda_af", valor: "" },
-          celda_ag: { nombre: "celda_ag", valor: "" },
-          celda_ah: { nombre: "celda_ah", valor: "" },
-          celda_ai: { nombre: "celda_ai", valor: "" },
-          celda_aj: { nombre: "celda_aj", valor: "" },
+          celda_a: "",
+          celda_b: "",
+          celda_c: "",
+          celda_d: "",
+          celda_e: "",
+          celda_f: "",
+          celda_g: "",
+          celda_h: "",
+          celda_i: "",
+          celda_j: "",
+          celda_k: "",
+          celda_l: "",
+          celda_m: "",
+          celda_n: "",
+          celda_o: "",
+          celda_p: "",
+          celda_q: "",
+          celda_r: "",
+          celda_s: "",
+          celda_t: "",
+          celda_u: "",
+          celda_v: "",
+          celda_w: "",
+          celda_x: "",
+          celda_y: "",
+          celda_z: "",
+          celda_aa: "",
+          celda_ab: "",
+          celda_ac: "",
+          celda_ad: "",
+          celda_ae: "",
+          celda_af: "",
+          celda_ag: "",
+          celda_ah: "",
+          celda_ai: "",
+          celda_aj: "",
         },
         {
           nombre: "Segunda planta",
-          celda_a: { nombre: "celda_a", valor: "" },
-          celda_b: { nombre: "celda_b", valor: "" },
-          celda_c: { nombre: "celda_c", valor: "" },
-          celda_d: { nombre: "celda_d", valor: "" },
-          celda_e: { nombre: "celda_e", valor: "" },
-          celda_f: { nombre: "celda_f", valor: "" },
-          celda_g: { nombre: "celda_g", valor: "" },
-          celda_h: { nombre: "celda_h", valor: "" },
-          celda_i: { nombre: "celda_i", valor: "" },
-          celda_j: { nombre: "celda_j", valor: "" },
-          celda_k: { nombre: "celda_k", valor: "" },
-          celda_l: { nombre: "celda_l", valor: "" },
-          celda_m: { nombre: "celda_m", valor: "" },
-          celda_n: { nombre: "celda_n", valor: "" },
-          celda_o: { nombre: "celda_o", valor: "" },
-          celda_p: { nombre: "celda_p", valor: "" },
-          celda_q: { nombre: "celda_q", valor: "" },
-          celda_r: { nombre: "celda_r", valor: "" },
-          celda_s: { nombre: "celda_s", valor: "" },
-          celda_t: { nombre: "celda_t", valor: "" },
-          celda_u: { nombre: "celda_u", valor: "" },
-          celda_v: { nombre: "celda_v", valor: "" },
-          celda_w: { nombre: "celda_w", valor: "" },
-          celda_x: { nombre: "celda_x", valor: "" },
-          celda_y: { nombre: "celda_y", valor: "" },
-          celda_z: { nombre: "celda_z", valor: "" },
-          celda_aa: { nombre: "celda_aa", valor: "" },
-          celda_ab: { nombre: "celda_ab", valor: "" },
-          celda_ac: { nombre: "celda_ac", valor: "" },
-          celda_ad: { nombre: "celda_ad", valor: "" },
-          celda_ae: { nombre: "celda_ae", valor: "" },
-          celda_af: { nombre: "celda_af", valor: "" },
-          celda_ag: { nombre: "celda_ag", valor: "" },
-          celda_ah: { nombre: "celda_ah", valor: "" },
-          celda_ai: { nombre: "celda_ai", valor: "" },
-          celda_aj: { nombre: "celda_aj", valor: "" },
+          celda_a: "",
+          celda_b: "",
+          celda_c: "",
+          celda_d: "",
+          celda_e: "",
+          celda_f: "",
+          celda_g: "",
+          celda_h: "",
+          celda_i: "",
+          celda_j: "",
+          celda_k: "",
+          celda_l: "",
+          celda_m: "",
+          celda_n: "",
+          celda_o: "",
+          celda_p: "",
+          celda_q: "",
+          celda_r: "",
+          celda_s: "",
+          celda_t: "",
+          celda_u: "",
+          celda_v: "",
+          celda_w: "",
+          celda_x: "",
+          celda_y: "",
+          celda_z: "",
+          celda_aa: "",
+          celda_ab: "",
+          celda_ac: "",
+          celda_ad: "",
+          celda_ae: "",
+          celda_af: "",
+          celda_ag: "",
+          celda_ah: "",
+          celda_ai: "",
+          celda_aj: "",
         },
         {
           nombre: "Tercera planta",
-          celda_a: { nombre: "celda_a", valor: "" },
-          celda_b: { nombre: "celda_b", valor: "" },
-          celda_c: { nombre: "celda_c", valor: "" },
-          celda_d: { nombre: "celda_d", valor: "" },
-          celda_e: { nombre: "celda_e", valor: "" },
-          celda_f: { nombre: "celda_f", valor: "" },
-          celda_g: { nombre: "celda_g", valor: "" },
-          celda_h: { nombre: "celda_h", valor: "" },
-          celda_i: { nombre: "celda_i", valor: "" },
-          celda_j: { nombre: "celda_j", valor: "" },
-          celda_k: { nombre: "celda_k", valor: "" },
-          celda_l: { nombre: "celda_l", valor: "" },
-          celda_m: { nombre: "celda_m", valor: "" },
-          celda_n: { nombre: "celda_n", valor: "" },
-          celda_o: { nombre: "celda_o", valor: "" },
-          celda_p: { nombre: "celda_p", valor: "" },
-          celda_q: { nombre: "celda_q", valor: "" },
-          celda_r: { nombre: "celda_r", valor: "" },
-          celda_s: { nombre: "celda_s", valor: "" },
-          celda_t: { nombre: "celda_t", valor: "" },
-          celda_u: { nombre: "celda_u", valor: "" },
-          celda_v: { nombre: "celda_v", valor: "" },
-          celda_w: { nombre: "celda_w", valor: "" },
-          celda_x: { nombre: "celda_x", valor: "" },
-          celda_y: { nombre: "celda_y", valor: "" },
-          celda_z: { nombre: "celda_z", valor: "" },
-          celda_aa: { nombre: "celda_aa", valor: "" },
-          celda_ab: { nombre: "celda_ab", valor: "" },
-          celda_ac: { nombre: "celda_ac", valor: "" },
-          celda_ad: { nombre: "celda_ad", valor: "" },
-          celda_ae: { nombre: "celda_ae", valor: "" },
-          celda_af: { nombre: "celda_af", valor: "" },
-          celda_ag: { nombre: "celda_ag", valor: "" },
-          celda_ah: { nombre: "celda_ah", valor: "" },
-          celda_ai: { nombre: "celda_ai", valor: "" },
-          celda_aj: { nombre: "celda_aj", valor: "" },
+          celda_a: "",
+          celda_b: "",
+          celda_c: "",
+          celda_d: "",
+          celda_e: "",
+          celda_f: "",
+          celda_g: "",
+          celda_h: "",
+          celda_i: "",
+          celda_j: "",
+          celda_k: "",
+          celda_l: "",
+          celda_m: "",
+          celda_n: "",
+          celda_o: "",
+          celda_p: "",
+          celda_q: "",
+          celda_r: "",
+          celda_s: "",
+          celda_t: "",
+          celda_u: "",
+          celda_v: "",
+          celda_w: "",
+          celda_x: "",
+          celda_y: "",
+          celda_z: "",
+          celda_aa: "",
+          celda_ab: "",
+          celda_ac: "",
+          celda_ad: "",
+          celda_ae: "",
+          celda_af: "",
+          celda_ag: "",
+          celda_ah: "",
+          celda_ai: "",
+          celda_aj: "",
         },
       ],
     });
-    const espacios = ref([
-      { id: "0", color: "bg-white", nombre: "Clic para borar" },
-      { id: "1", color: "bg-danger", nombre: "Sala/comedor" },
-      { id: "2", color: "bg-success", nombre: "Cocina" },
-      { id: "3", color: "bg-secondary", nombre: "Dormitorio" },
-      { id: "4", color: "bg-info", nombre: "Baño" },
-      { id: "5", color: "bg-dark", nombre: "Otro (techado)" },
-      { id: "6", color: "bg-warning", nombre: "Otro/Ninguno (sin techar)" },
-    ]);
-    const urbanizaciones = ref([
-      { id: "1", nombre: "TAWANTNSUYO" },
-      { id: "2", nombre: "KARIGRANDE" },
-      { id: "3", nombre: "SAN LUIS" },
-      { id: "4", nombre: "LOS INCAS" },
-      { id: "5", nombre: "AGUA BUENA" },
-      { id: "6", nombre: "SAJUAN" },
-    ]);
+    const celdas = [
+      {
+        nombre: "Primera planta",
+        celda_a: "",
+        celda_b: "",
+        celda_c: "",
+        celda_d: "",
+        celda_e: "",
+        celda_f: "",
+        celda_g: "",
+        celda_h: "",
+        celda_i: "",
+        celda_j: "",
+        celda_k: "",
+        celda_l: "",
+        celda_m: "",
+        celda_n: "",
+        celda_o: "",
+        celda_p: "",
+        celda_q: "",
+        celda_r: "",
+        celda_s: "",
+        celda_t: "",
+        celda_u: "",
+        celda_v: "",
+        celda_w: "",
+        celda_x: "",
+        celda_y: "",
+        celda_z: "",
+        celda_aa: "",
+        celda_ab: "",
+        celda_ac: "",
+        celda_ad: "",
+        celda_ae: "",
+        celda_af: "",
+        celda_ag: "",
+        celda_ah: "",
+        celda_ai: "",
+        celda_aj: "",
+      },
+      {
+        nombre: "Segunda planta",
+        celda_a: "",
+        celda_b: "",
+        celda_c: "",
+        celda_d: "",
+        celda_e: "",
+        celda_f: "",
+        celda_g: "",
+        celda_h: "",
+        celda_i: "",
+        celda_j: "",
+        celda_k: "",
+        celda_l: "",
+        celda_m: "",
+        celda_n: "",
+        celda_o: "",
+        celda_p: "",
+        celda_q: "",
+        celda_r: "",
+        celda_s: "",
+        celda_t: "",
+        celda_u: "",
+        celda_v: "",
+        celda_w: "",
+        celda_x: "",
+        celda_y: "",
+        celda_z: "",
+        celda_aa: "",
+        celda_ab: "",
+        celda_ac: "",
+        celda_ad: "",
+        celda_ae: "",
+        celda_af: "",
+        celda_ag: "",
+        celda_ah: "",
+        celda_ai: "",
+        celda_aj: "",
+      },
+      {
+        nombre: "Tercera planta",
+        celda_a: "",
+        celda_b: "",
+        celda_c: "",
+        celda_d: "",
+        celda_e: "",
+        celda_f: "",
+        celda_g: "",
+        celda_h: "",
+        celda_i: "",
+        celda_j: "",
+        celda_k: "",
+        celda_l: "",
+        celda_m: "",
+        celda_n: "",
+        celda_o: "",
+        celda_p: "",
+        celda_q: "",
+        celda_r: "",
+        celda_s: "",
+        celda_t: "",
+        celda_u: "",
+        celda_v: "",
+        celda_w: "",
+        celda_x: "",
+        celda_y: "",
+        celda_z: "",
+        celda_aa: "",
+        celda_ab: "",
+        celda_ac: "",
+        celda_ad: "",
+        celda_ae: "",
+        celda_af: "",
+        celda_ag: "",
+        celda_ah: "",
+        celda_ai: "",
+        celda_aj: "",
+      },
+    ];
+
+    const espacios = ref([]);
+    const urbanizaciones = ref([]);
     const espacio = ref({ id: "" });
 
     function recojerColor(espacioEscojido) {
@@ -502,7 +617,7 @@ export default {
       if (!espacio.value) {
         alert("Escoja un color de la lista");
       }
-      distribucion.value.celdas[index][celdaPicada].valor = espacio.value.id;
+      distribucion.value.celdas[index][celdaPicada] = espacio.value.id;
     }
     function mostrarValor(id) {
       return espacios.value.map((fila) => {
@@ -519,15 +634,56 @@ export default {
         distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
         distribucion.value.periodo_fin = busqueda.value.anioActual;
       }
+      buscarLectura();
       // busqueda.value.anioActual=anioActual.value-1+'/'+anioActual.value
       // anioAnteriorTexto.value=anioActual.value-2+'/'+anioActual.value-1
       // anioPosteriorTexto.value=anioActual.value+1+'/'+anioActual.value+2
     }
-    function guardar() {
-      axios.post(`lectura`, distribucion).then((res) => {
-        console.log("tag", res);
+    function getUrbanizaciones() {
+      axios.get("urbanizacion").then((res) => {
+        urbanizaciones.value = res.data;
       });
     }
+    function getEspacios() {
+      axios.get("espacio").then((res) => {
+        espacios.value = res.data;
+      });
+    }
+    async function guardar() {
+      console.log("busqueda", busqueda.value);
+      distribucion.value.urbanizacion_id = busqueda.value.urbanizacion;
+      distribucion.value.manzana = busqueda.value.manzana;
+      distribucion.value.lote = busqueda.value.lote;
+      await axios.post(`lectura`, distribucion.value).then((res) => {
+        console.log("tag", res.data);
+      });
+    }
+    async function buscarLectura() {
+      busqueda.value.periodo_inicio = distribucion.value.periodo_inicio;
+      busqueda.value.periodo_fin = distribucion.value.periodo_fin;
+
+      console.log("busqueda", busqueda.value);
+      distribucion.value.id = 0;
+      distribucion.value.celdas = celdas;
+
+      console.log("distribucion-antes", distribucion.value);
+      await axios.post(`lectura-buscar`, busqueda.value).then((res) => {
+        console.log("lectura-buscar", res.data);
+        if (res.data) {
+          distribucion.value = res.data;
+          console.log("distribucion-encontro", distribucion.value);
+        } else {
+          distribucion.value.id = 0;
+          distribucion.value.celdas = celdas;
+
+          console.log("distribucion-no-encontro", distribucion.value);
+        }
+      });
+    }
+    onMounted(() => {
+      getUrbanizaciones();
+      getEspacios();
+    });
     return {
       distribucion,
       urbanizaciones,
@@ -542,6 +698,10 @@ export default {
       // anioPosteriorTexto,
       ponerAnio,
       guardar,
+      buscarLectura,
+      getUrbanizaciones,
+      getEspacios,
+      celdas,
     };
   },
 };

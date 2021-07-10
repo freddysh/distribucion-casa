@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lectura;
+use App\Models\Celda;
 use Illuminate\Http\Request;
 
 class LecturaController extends Controller
@@ -31,6 +32,19 @@ class LecturaController extends Controller
     {
         //
     }
+    public function buscar(Request $request)
+    {
+        //
+
+        $lectura=Lectura::with('celdas')
+        ->where('urbanizacion_id',$request->urbanizacion)
+        ->where('manzana',strtoupper($request->manzana))
+        ->where('lote',strtoupper($request->lote))
+        ->where('periodo_inicio',$request->periodo_inicio)
+        ->where('periodo_fin',$request->periodo_fin)
+        ->get()->first();
+        return $lectura;
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -41,125 +55,75 @@ class LecturaController extends Controller
     public function store(Request $request)
     {
         //
-        return $request->all();
-        $lectura=new Lectura();
-        $lectura->codigo=$request->codigo;
-        $lectura->celda_p1_a=$request->celda_p1_a;
-        $lectura->celda_p1_b=$request->celda_p1_b;
-        $lectura->celda_p1_c=$request->celda_p1_c;
-        $lectura->celda_p1_d=$request->celda_p1_d;
-        $lectura->celda_p1_e=$request->celda_p1_e;
-        $lectura->celda_p1_f=$request->celda_p1_f;
-        $lectura->celda_p1_g=$request->celda_p1_g;
-        $lectura->celda_p1_h=$request->celda_p1_h;
-        $lectura->celda_p1_i=$request->celda_p1_i;
-        $lectura->celda_p1_j=$request->celda_p1_j;
-        $lectura->celda_p1_k=$request->celda_p1_k;
-        $lectura->celda_p1_l=$request->celda_p1_l;
-        $lectura->celda_p1_m=$request->celda_p1_m;
-        $lectura->celda_p1_n=$request->celda_p1_n;
-        $lectura->celda_p1_o=$request->celda_p1_o;
-        $lectura->celda_p1_p=$request->celda_p1_p;
-        $lectura->celda_p1_q=$request->celda_p1_q;
-        $lectura->celda_p1_r=$request->celda_p1_r;
-        $lectura->celda_p1_s=$request->celda_p1_s;
-        $lectura->celda_p1_t=$request->celda_p1_t;
-        $lectura->celda_p1_u=$request->celda_p1_u;
-        $lectura->celda_p1_v=$request->celda_p1_v;
-        $lectura->celda_p1_w=$request->celda_p1_w;
-        $lectura->celda_p1_x=$request->celda_p1_x;
-        $lectura->celda_p1_y=$request->celda_p1_y;
-        $lectura->celda_p1_z=$request->celda_p1_z;
-        $lectura->celda_p1_aa=$request->celda_p1_aa;
-        $lectura->celda_p1_ab=$request->celda_p1_ab;
-        $lectura->celda_p1_ac=$request->celda_p1_ac;
-        $lectura->celda_p1_ad=$request->celda_p1_ad;
-        $lectura->celda_p1_ae=$request->celda_p1_ae;
-        $lectura->celda_p1_af=$request->celda_p1_af;
-        $lectura->celda_p1_ag=$request->celda_p1_ag;
-        $lectura->celda_p1_ah=$request->celda_p1_ah;
-        $lectura->celda_p1_ai=$request->celda_p1_ai;
-        $lectura->celda_p1_aj=$request->celda_p1_aj;
-        $lectura->celda_p2_a=$request->celda_p2_a;
-        $lectura->celda_p2_b=$request->celda_p2_b;
-        $lectura->celda_p2_c=$request->celda_p2_c;
-        $lectura->celda_p2_d=$request->celda_p2_d;
-        $lectura->celda_p2_e=$request->celda_p2_e;
-        $lectura->celda_p2_f=$request->celda_p2_f;
-        $lectura->celda_p2_g=$request->celda_p2_g;
-        $lectura->celda_p2_h=$request->celda_p2_h;
-        $lectura->celda_p2_h=$request->celda_p2_h;
-        $lectura->celda_p2_i=$request->celda_p2_i;
-        $lectura->celda_p2_j=$request->celda_p2_j;
-        $lectura->celda_p2_k=$request->celda_p2_k;
-        $lectura->celda_p2_l=$request->celda_p2_l;
-        $lectura->celda_p2_m=$request->celda_p2_m;
-        $lectura->celda_p2_n=$request->celda_p2_n;
-        $lectura->celda_p2_o=$request->celda_p2_o;
-        $lectura->celda_p2_p=$request->celda_p2_p;
-        $lectura->celda_p2_q=$request->celda_p2_q;
-        $lectura->celda_p2_r=$request->celda_p2_r;
-        $lectura->celda_p2_s=$request->celda_p2_s;
-        $lectura->celda_p2_t=$request->celda_p2_t;
-        $lectura->celda_p2_u=$request->celda_p2_u;
-        $lectura->celda_p2_v=$request->celda_p2_v;
-        $lectura->celda_p2_w=$request->celda_p2_w;
-        $lectura->celda_p2_x=$request->celda_p2_x;
-        $lectura->celda_p2_y=$request->celda_p2_y;
-        $lectura->celda_p2_z=$request->celda_p2_z;
-        $lectura->celda_p2_aa=$request->celda_p2_aa;
-        $lectura->celda_p2_ab=$request->celda_p2_ab;
-        $lectura->celda_p2_ac=$request->celda_p2_ac;
-        $lectura->celda_p2_ad=$request->celda_p2_ad;
-        $lectura->celda_p2_ae=$request->celda_p2_ae;
-        $lectura->celda_p2_af=$request->celda_p2_af;
-        $lectura->celda_p2_ag=$request->celda_p2_ag;
-        $lectura->celda_p2_ah=$request->celda_p2_ah;
-        $lectura->celda_p2_ai=$request->celda_p2_ai;
-        $lectura->celda_p2_aj=$request->celda_p2_aj;
-        $lectura->celda_p3_a=$request->celda_p3_a;
-        $lectura->celda_p3_b=$request->celda_p3_b;
-        $lectura->celda_p3_c=$request->celda_p3_c;
-        $lectura->celda_p3_d=$request->celda_p3_d;
-        $lectura->celda_p3_e=$request->celda_p3_e;
-        $lectura->celda_p3_f=$request->celda_p3_f;
-        $lectura->celda_p3_g=$request->celda_p3_g;
-        $lectura->celda_p3_h=$request->celda_p3_h;
-        $lectura->celda_p3_i=$request->celda_p3_i;
-        $lectura->celda_p3_j=$request->celda_p3_j;
-        $lectura->celda_p3_k=$request->celda_p3_k;
-        $lectura->celda_p3_l=$request->celda_p3_l;
-        $lectura->celda_p3_m=$request->celda_p3_m;
-        $lectura->celda_p3_n=$request->celda_p3_n;
-        $lectura->celda_p3_o=$request->celda_p3_o;
-        $lectura->celda_p3_p=$request->celda_p3_p;
-        $lectura->celda_p3_q=$request->celda_p3_q;
-        $lectura->celda_p3_r=$request->celda_p3_r;
-        $lectura->celda_p3_s=$request->celda_p3_s;
-        $lectura->celda_p3_t=$request->celda_p3_t;
-        $lectura->celda_p3_u=$request->celda_p3_u;
-        $lectura->celda_p3_v=$request->celda_p3_v;
-        $lectura->celda_p3_w=$request->celda_p3_w;
-        $lectura->celda_p3_x=$request->celda_p3_x;
-        $lectura->celda_p3_y=$request->celda_p3_y;
-        $lectura->celda_p3_z=$request->celda_p3_z;
-        $lectura->celda_p3_aa=$request->celda_p3_aa;
-        $lectura->celda_p3_ab=$request->celda_p3_ab;
-        $lectura->celda_p3_ac=$request->celda_p3_ac;
-        $lectura->celda_p3_ad=$request->celda_p3_ad;
-        $lectura->celda_p3_ae=$request->celda_p3_ae;
-        $lectura->celda_p3_af=$request->celda_p3_af;
-        $lectura->celda_p3_ag=$request->celda_p3_ag;
-        $lectura->celda_p3_ah=$request->celda_p3_ah;
-        $lectura->celda_p3_ai=$request->celda_p3_ai;
-        $lectura->celda_p3_aj=$request->celda_p3_aj;
-        $lectura->manzana=$request->manzana;
-        $lectura->lote=$request->lote;
-        $lectura->imagen='';
-        $lectura->periodo_inicio=$request->periodo_inicio;
-        $lectura->periodo_fin=$request->periodo_fin;
-        $lectura->urbanizacion_id=$request->urbanizacion_id;
-        $lectura->save();
+        try {
+            //code...
+            $lectura=null;
+            if($request->id==0)
+                $lectura=new Lectura();
+            elseif($request->id>0)
+                $lectura= Lectura::find($request->id);
+
+            $lectura->manzana=$request->manzana;
+            $lectura->lote=$request->lote;
+            $lectura->imagen='';
+            $lectura->periodo_inicio=$request->periodo_inicio;
+            $lectura->periodo_fin=$request->periodo_fin;
+            $lectura->urbanizacion_id=$request->urbanizacion_id;
+            $lectura->codigo=substr($request->periodo_inicio, 2, 4).substr($request->periodo_fin, 2, 4).$request->urbanizacion_id.$request->manzana.$request->lote;
+            $lectura->save();
+
+            if($request->id>0){
+                $celdas=Celda::where('lectura_id',$request->id)->delete();
+            }
+            foreach ($request->celdas as $key => $celda) {
+                # code...
+                $celdita= new Celda();
+                $celdita->nombre=$celda['nombre'];
+                $celdita->celda_a=$celda['celda_a']?$celda['celda_a']:'';
+                $celdita->celda_b=$celda['celda_b']?$celda['celda_b']:'';
+                $celdita->celda_c=$celda['celda_c']?$celda['celda_c']:'';
+                $celdita->celda_d=$celda['celda_d']?$celda['celda_d']:'';
+                $celdita->celda_e=$celda['celda_e']?$celda['celda_e']:'';
+                $celdita->celda_f=$celda['celda_f']?$celda['celda_f']:'';
+                $celdita->celda_g=$celda['celda_g']?$celda['celda_g']:'';
+                $celdita->celda_h=$celda['celda_h']?$celda['celda_h']:'';
+                $celdita->celda_i=$celda['celda_i']?$celda['celda_i']:'';
+                $celdita->celda_j=$celda['celda_j']?$celda['celda_j']:'';
+                $celdita->celda_k=$celda['celda_k']?$celda['celda_k']:'';
+                $celdita->celda_l=$celda['celda_l']?$celda['celda_l']:'';
+                $celdita->celda_m=$celda['celda_m']?$celda['celda_m']:'';
+                $celdita->celda_n=$celda['celda_n']?$celda['celda_n']:'';
+                $celdita->celda_o=$celda['celda_o']?$celda['celda_o']:'';
+                $celdita->celda_p=$celda['celda_p']?$celda['celda_p']:'';
+                $celdita->celda_q=$celda['celda_q']?$celda['celda_q']:'';
+                $celdita->celda_r=$celda['celda_r']?$celda['celda_r']:'';
+                $celdita->celda_s=$celda['celda_s']?$celda['celda_s']:'';
+                $celdita->celda_t=$celda['celda_t']?$celda['celda_t']:'';
+                $celdita->celda_u=$celda['celda_u']?$celda['celda_u']:'';
+                $celdita->celda_v=$celda['celda_v']?$celda['celda_v']:'';
+                $celdita->celda_w=$celda['celda_w']?$celda['celda_w']:'';
+                $celdita->celda_x=$celda['celda_x']?$celda['celda_x']:'';
+                $celdita->celda_y=$celda['celda_y']?$celda['celda_y']:'';
+                $celdita->celda_z=$celda['celda_z']?$celda['celda_z']:'';
+                $celdita->celda_aa=$celda['celda_aa']?$celda['celda_aa']:'';
+                $celdita->celda_ab=$celda['celda_ab']?$celda['celda_ab']:'';
+                $celdita->celda_ac=$celda['celda_ac']?$celda['celda_ac']:'';
+                $celdita->celda_ad=$celda['celda_ad']?$celda['celda_ad']:'';
+                $celdita->celda_ae=$celda['celda_ae']?$celda['celda_ae']:'';
+                $celdita->celda_af=$celda['celda_af']?$celda['celda_af']:'';
+                $celdita->celda_ag=$celda['celda_ag']?$celda['celda_ag']:'';
+                $celdita->celda_ah=$celda['celda_ah']?$celda['celda_ah']:'';
+                $celdita->celda_ai=$celda['celda_ai']?$celda['celda_ai']:'';
+                $celdita->celda_aj=$celda['celda_aj']?$celda['celda_aj']:'';
+                $celdita->lectura_id=$lectura->id;
+                $celdita->save();
+            }
+            return '1';
+        } catch (\Throwable $th) {
+            //throw $th;
+            return $th;
+        }
+
     }
 
     /**
