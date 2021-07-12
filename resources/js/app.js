@@ -35,8 +35,12 @@ require('./bootstrap');
 //     el: '#app',
 // });
 import { createApp } from 'vue';
+
 import LecturaComponent from './components/Lectura/index';
 import ExampleComponent from './components/ExampleComponent';
+
+// import Toasted from 'vue-toasted/dist/vue-toasted';
+// var Toasted = require('vue-toasted').default
 // const { createApp, ref, reactive, toRefs, watch, computed } = require('vue');
 const app = createApp({
     components: {
@@ -44,4 +48,5 @@ const app = createApp({
         ExampleComponent,
     }
 });
+// app.use(Toasted);
 app.mount('#app');

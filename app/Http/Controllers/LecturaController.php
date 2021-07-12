@@ -35,15 +35,33 @@ class LecturaController extends Controller
     public function buscar(Request $request)
     {
         //
+        try {
+            $lectura=Lectura::with('celdas')
+            ->where('urbanizacion_id',$request->urbanizacion)
+            ->where('manzana',strtoupper($request->manzana))
+            ->where('lote',strtoupper($request->lote))
+            ->where('periodo_inicio',$request->periodo_inicio)
+            ->where('periodo_fin',$request->periodo_fin)
+            ->get()->first();
+            $lecturaAnterior=Lectura::with('celdas')
+            ->where('urbanizacion_id',$request->urbanizacion)
+            ->where('manzana',strtoupper($request->manzana))
+            ->where('lote',strtoupper($request->lote))
+            ->where('periodo_inicio',$request->periodo_inicio-2)
+            ->where('periodo_fin',$request->periodo_fin-2)
+            ->get()->first();
+            $rpt=0;
+            if($lectura)
+                $rpt=1;
+            if(!$lectura&&$lecturaAnterior)
+                $rpt=2;
+            return Response()->json(['rpt'=>$rpt,'lectura'=>$lectura,'lecturaAnterior'=>$lecturaAnterior]);
 
-        $lectura=Lectura::with('celdas')
-        ->where('urbanizacion_id',$request->urbanizacion)
-        ->where('manzana',strtoupper($request->manzana))
-        ->where('lote',strtoupper($request->lote))
-        ->where('periodo_inicio',$request->periodo_inicio)
-        ->where('periodo_fin',$request->periodo_fin)
-        ->get()->first();
-        return $lectura;
+        } catch (\Throwable $th) {
+            return Response()->json(['rpt'=>$th,'lectura'=>null,'lecturaAnterior'=>null]);
+
+        }
+
     }
 
     /**

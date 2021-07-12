@@ -17963,6 +17963,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup() {
+    var rpt = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(0);
     var busqueda = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)({
       urbanizacion: "",
       manzana: "",
@@ -18209,6 +18210,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       celda_ai: "",
       celda_aj: ""
     }];
+    var lecturaAnterior = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)({});
     var espacios = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
     var urbanizaciones = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)([]);
     var espacio = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)({
@@ -18304,24 +18306,47 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 busqueda.value.periodo_inicio = distribucion.value.periodo_inicio;
                 busqueda.value.periodo_fin = distribucion.value.periodo_fin;
                 console.log("busqueda", busqueda.value);
-                distribucion.value.id = 0;
-                distribucion.value.celdas = celdas;
-                console.log("distribucion-antes", distribucion.value);
-                _context2.next = 8;
+                _context2.next = 5;
                 return axios.post("lectura-buscar", busqueda.value).then(function (res) {
                   console.log("lectura-buscar", res.data);
+                  rpt.value = 0;
+                  distribucion.value.id = 0;
+                  distribucion.value.celdas = celdas;
 
-                  if (res.data) {
-                    distribucion.value = res.data;
-                    console.log("distribucion-encontro", distribucion.value);
+                  if (res.data.rpt >= 1) {
+                    if (res.data.rpt == 1) {
+                      rpt.value = 1;
+                      distribucion.value = res.data.lectura;
+                      alert("Se encontro un registro");
+                    } else if (res.data.rpt == 2) {
+                      rpt.value = 2; // distribucion.value = res.data.lecturaAnterior;
+                      // distribucion.value.id = 0;
+                      // distribucion.value.periodo_inicio =
+                      //   parseInt(distribucion.value.periodo_inicio) + 2;
+                      // distribucion.value.periodo_fin =
+                      //   parseInt(distribucion.value.periodo_fin) + 2;
+
+                      // distribucion.value = res.data.lecturaAnterior;
+                      // distribucion.value.id = 0;
+                      // distribucion.value.periodo_inicio =
+                      //   parseInt(distribucion.value.periodo_inicio) + 2;
+                      // distribucion.value.periodo_fin =
+                      //   parseInt(distribucion.value.periodo_fin) + 2;
+                      lecturaAnterior.value = res.data.lecturaAnterior;
+                      lecturaAnterior.value.id = 0;
+                      lecturaAnterior.value.periodo_inicio = parseInt(lecturaAnterior.value.periodo_inicio) + 2;
+                      lecturaAnterior.value.periodo_fin = parseInt(lecturaAnterior.value.periodo_fin) + 2;
+                      alert("Se encontro un registro del periodo[".concat(parseInt(distribucion.value.periodo_inicio) - 2, "/").concat(parseInt(distribucion.value.periodo_fin) - 2, "]"));
+                    }
                   } else {
+                    rpt.value = 0;
                     distribucion.value.id = 0;
                     distribucion.value.celdas = celdas;
-                    console.log("distribucion-no-encontro", distribucion.value);
+                    alert("No se encontro un registro");
                   }
                 });
 
-              case 8:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -18331,11 +18356,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return _buscarLectura.apply(this, arguments);
     }
 
+    function mostrarLecturaAnterior() {
+      distribucion.value = lecturaAnterior.value;
+    }
+
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
       getUrbanizaciones();
       getEspacios();
     });
     return {
+      rpt: rpt,
       distribucion: distribucion,
       urbanizaciones: urbanizaciones,
       espacios: espacios,
@@ -18352,7 +18382,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       buscarLectura: buscarLectura,
       getUrbanizaciones: getUrbanizaciones,
       getEspacios: getEspacios,
-      celdas: celdas
+      celdas: celdas,
+      lecturaAnterior: lecturaAnterior,
+      mostrarLecturaAnterior: mostrarLecturaAnterior
     };
   }
 });
@@ -18539,7 +18571,7 @@ var _hoisted_33 = {
 var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "row"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-  "class": "col-12 text-center"
+  "class": "text-center col-12"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, " === Calle === ")])], -1
 /* HOISTED */
 );
@@ -18654,18 +18686,24 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 512
   /* NEED_PATCH */
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $setup.busqueda.lote]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
-    "class": "btn btn-success mt-4",
+    "class": "mt-4 btn btn-success",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $setup.buscarLectura();
     })
   }, [_hoisted_15, _hoisted_16])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h4", _hoisted_17, [_hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, "Periodo actual: " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.distribucion.periodo_inicio + '/' + $setup.distribucion.periodo_fin), 1
   /* TEXT */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [_hoisted_23, _hoisted_24, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.espacios, function (espacio_, index) {
+  ), $setup.distribucion.id == 0 && $setup.rpt == 2 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("button", {
+    key: 0,
+    onClick: _cache[5] || (_cache[5] = function ($event) {
+      return $setup.mostrarLecturaAnterior();
+    }),
+    "class": "btn btn-primary btn-sm"
+  }, "Mostrar lectura del periodo anterior")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_22, [_hoisted_23, _hoisted_24, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.espacios, function (espacio_, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": "row",
       key: index
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
-      "class": ["col-8 btn btn-sm", espacio_.color],
+      "class": ["border col-8 btn btn-sm", espacio_.color],
       onClick: function onClick($event) {
         return $setup.recojerColor(espacio_);
       }
@@ -18937,14 +18975,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* KEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": ["btn btn-block", $setup.distribucion.id == 0 ? 'btn-primary' : 'btn-warning'],
-    onClick: _cache[5] || (_cache[5] = function ($event) {
+    onClick: _cache[6] || (_cache[6] = function ($event) {
       return $setup.guardar();
     })
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.distribucion.id == 0 ? 'Guardar' : 'Editar'), 3
-  /* TEXT, CLASS */
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.distribucion.id == 0 ? 'Guardar' : 'Editar'), 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" {{ distribucion.id==0&&rpt==2?' (Lectura del año pasado)':'' }} ")], 2
+  /* CLASS */
   )])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_38, [_hoisted_39, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-secondary btn-block btn-lg",
-    onClick: _cache[6] || (_cache[6] = function ($event) {
+    onClick: _cache[7] || (_cache[7] = function ($event) {
       return $setup.ponerAnio('-');
     })
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.busqueda.anioActual - 3 + '/' + ($setup.busqueda.anioActual - 2)), 1
@@ -18953,7 +18993,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* TEXT */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     "class": "btn btn-secondary btn-block btn-lg",
-    onClick: _cache[7] || (_cache[7] = function ($event) {
+    onClick: _cache[8] || (_cache[8] = function ($event) {
       return $setup.ponerAnio('+');
     })
   }, [_hoisted_47, _hoisted_48, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.busqueda.anioActual + 1 + '/' + ($setup.busqueda.anioActual + 2)), 1
@@ -19007,14 +19047,17 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window
 
 
 
- // const { createApp, ref, reactive, toRefs, watch, computed } = require('vue');
+ // import Toasted from 'vue-toasted/dist/vue-toasted';
+// var Toasted = require('vue-toasted').default
+// const { createApp, ref, reactive, toRefs, watch, computed } = require('vue');
 
 var app = (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
   components: {
     LecturaComponent: _components_Lectura_index__WEBPACK_IMPORTED_MODULE_1__.default,
     ExampleComponent: _components_ExampleComponent__WEBPACK_IMPORTED_MODULE_2__.default
   }
-});
+}); // app.use(Toasted);
+
 app.mount('#app');
 
 /***/ }),

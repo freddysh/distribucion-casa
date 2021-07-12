@@ -51,7 +51,7 @@
           </div>
           <div class="col-sm-12 col-md-3">
             <button
-              class="btn btn-success mt-4"
+              class="mt-4 btn btn-success"
               @click="buscarLectura()"
             >
               <svg
@@ -68,7 +68,13 @@
             </button>
           </div>
         </div>
-        <h4 class="text-primary">Por favor indique los usos dentro de casa por año <b>Periodo actual: {{ distribucion.periodo_inicio+'/'+distribucion.periodo_fin }}</b> </h4>
+        <h4 class="text-primary">Por favor indique los usos dentro de casa por año <b>Periodo actual: {{ distribucion.periodo_inicio+'/'+distribucion.periodo_fin }}</b>
+          <button
+            @click="mostrarLecturaAnterior()"
+            v-if="distribucion.id==0&&rpt==2"
+            class="btn btn-primary btn-sm"
+          >Mostrar lectura del periodo anterior</button>
+        </h4>
         <div class="row">
           <div class="col-sm-12 col-md-3">
             <div class="card">
@@ -81,7 +87,7 @@
                   :key="index"
                 >
                   <div
-                    class="col-8 btn btn-sm"
+                    class="border col-8 btn btn-sm"
                     :class="espacio_.color"
                     @click="recojerColor(espacio_)"
                   >{{ espacio_.nombre }}</div>
@@ -272,7 +278,7 @@
                       </tr>
                     </table>
                     <div class="row">
-                      <div class="col-12 text-center">
+                      <div class="text-center col-12">
                         <span>
                           === Calle ===
                         </span>
@@ -286,6 +292,7 @@
                       @click="guardar()"
                     >
                       {{ distribucion.id==0?'Guardar':'Editar' }}
+                      <!-- {{ distribucion.id==0&&rpt==2?' (Lectura del año pasado)':'' }} -->
                     </button>
                   </div>
                 </div>
@@ -350,6 +357,7 @@
 import { computed, reactive, ref, toRefs, onMounted } from "vue";
 export default {
   setup() {
+    const rpt = ref(0);
     const busqueda = ref({
       urbanizacion: "",
       manzana: "",
@@ -604,7 +612,7 @@ export default {
         celda_aj: "",
       },
     ];
-
+    const lecturaAnterior = ref({});
     const espacios = ref([]);
     const urbanizaciones = ref([]);
     const espacio = ref({ id: "" });
@@ -663,28 +671,55 @@ export default {
       busqueda.value.periodo_fin = distribucion.value.periodo_fin;
 
       console.log("busqueda", busqueda.value);
-      distribucion.value.id = 0;
-      distribucion.value.celdas = celdas;
 
-      console.log("distribucion-antes", distribucion.value);
       await axios.post(`lectura-buscar`, busqueda.value).then((res) => {
         console.log("lectura-buscar", res.data);
-        if (res.data) {
-          distribucion.value = res.data;
-          console.log("distribucion-encontro", distribucion.value);
+        rpt.value = 0;
+        distribucion.value.id = 0;
+        distribucion.value.celdas = celdas;
+
+        if (res.data.rpt >= 1) {
+          if (res.data.rpt == 1) {
+            rpt.value = 1;
+            distribucion.value = res.data.lectura;
+            alert("Se encontro un registro");
+          } else if (res.data.rpt == 2) {
+            rpt.value = 2;
+            // distribucion.value = res.data.lecturaAnterior;
+            // distribucion.value.id = 0;
+            // distribucion.value.periodo_inicio =
+            //   parseInt(distribucion.value.periodo_inicio) + 2;
+            // distribucion.value.periodo_fin =
+            //   parseInt(distribucion.value.periodo_fin) + 2;
+            lecturaAnterior.value = res.data.lecturaAnterior;
+            lecturaAnterior.value.id = 0;
+            lecturaAnterior.value.periodo_inicio =
+              parseInt(lecturaAnterior.value.periodo_inicio) + 2;
+            lecturaAnterior.value.periodo_fin =
+              parseInt(lecturaAnterior.value.periodo_fin) + 2;
+            alert(
+              `Se encontro un registro del periodo[${
+                parseInt(distribucion.value.periodo_inicio) - 2
+              }/${parseInt(distribucion.value.periodo_fin) - 2}]`
+            );
+          }
         } else {
+          rpt.value = 0;
           distribucion.value.id = 0;
           distribucion.value.celdas = celdas;
-
-          console.log("distribucion-no-encontro", distribucion.value);
+          alert("No se encontro un registro");
         }
       });
+    }
+    function mostrarLecturaAnterior() {
+      distribucion.value = lecturaAnterior.value;
     }
     onMounted(() => {
       getUrbanizaciones();
       getEspacios();
     });
     return {
+      rpt,
       distribucion,
       urbanizaciones,
       espacios,
@@ -702,6 +737,8 @@ export default {
       getUrbanizaciones,
       getEspacios,
       celdas,
+      lecturaAnterior,
+      mostrarLecturaAnterior,
     };
   },
 };
