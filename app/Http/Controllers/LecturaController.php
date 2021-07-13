@@ -76,8 +76,19 @@ class LecturaController extends Controller
         try {
             //code...
             $lectura=null;
-            if($request->id==0)
-                $lectura=new Lectura();
+            if($request->id==0){
+                $lectura= Lectura::where('urbanizacion_id',$request->urbanizacion_id)
+                            ->where('manzana',$request->manzana)
+                            ->where('lote',$request->lote)
+                            ->where('periodo_inicio',$request->periodo_inicio)
+                            ->where('periodo_fin',$request->periodo_fin)->get()->first();
+                if($lectura){
+                $celdas1=Celda::where('lectura_id',$lectura->id)->delete();
+                }
+                elseif(!$lectura)
+                    $lectura=new Lectura();
+
+            }
             elseif($request->id>0)
                 $lectura= Lectura::find($request->id);
 

@@ -21,6 +21,12 @@
                   :value="urb.id"
                 >{{ urb.nombre }}</option>
               </select>
+              <span
+                v-if="v$.urbanizacion.$error"
+                class="text-danger"
+              >
+                {{ v$.urbanizacion.$errors[0].$message }}
+              </span>
             </div>
           </div>
           <div class="col-sm-12 col-md-3">
@@ -34,6 +40,12 @@
                 placeholder="Ejemlo: A"
                 v-model="busqueda.manzana"
               >
+              <span
+                v-if="v$.manzana.$error"
+                class="text-danger"
+              >
+                {{ v$.manzana.$errors[0].$message }}
+              </span>
             </div>
           </div>
           <div class="col-sm-12 col-md-3">
@@ -47,6 +59,12 @@
                 placeholder="Ejemlo: 5"
                 v-model="busqueda.lote"
               >
+              <span
+                v-if="v$.lote.$error"
+                class="text-danger"
+              >
+                {{ v$.lote.$errors[0].$message }}
+              </span>
             </div>
           </div>
           <div class="col-sm-12 col-md-3">
@@ -73,7 +91,7 @@
             @click="mostrarLecturaAnterior()"
             v-if="distribucion.id==0&&rpt==2"
             class="btn btn-primary btn-sm"
-          >Mostrar lectura del periodo anterior</button>
+          >Mostrar lectura del periodo anterior ({{ distribucion.periodo_inicio-2 }}/{{ distribucion.periodo_fin-2 }})</button>
         </h4>
         <div class="row">
           <div class="col-sm-12 col-md-3">
@@ -324,7 +342,10 @@
 
                     </button>
                   </div>
-                  <div class="col-12"><button class="btn btn-primary btn-block btn-lg"><b>{{ (busqueda.anioActual-1)+'/'+busqueda.anioActual }}</b></button> </div>
+                  <div
+                    v-show="false"
+                    class="col-12"
+                  ><button class="btn btn-primary btn-block btn-lg"><b>{{ (busqueda.anioActual-1)+'/'+busqueda.anioActual }}</b></button> </div>
                   <div class="col-12">
                     <button
                       class="btn btn-secondary btn-block btn-lg"
@@ -355,6 +376,12 @@
 </template>
 <script>
 import { computed, reactive, ref, toRefs, onMounted } from "vue";
+
+import Swal from "sweetalert2";
+
+import { useVuelidate } from "@vuelidate/core";
+import { required, minLength, helpers } from "@vuelidate/validators";
+
 export default {
   setup() {
     const rpt = ref(0);
@@ -366,6 +393,18 @@ export default {
       periodo_inicio: new Date().getFullYear() - 1,
       periodo_fin: new Date().getFullYear(),
     });
+    const mustBeLearnVue = (value) => value.includes("learnvue");
+    const rulesBusqueda = computed(() => {
+      return {
+        urbanizacion: { required, minLength: minLength(1) },
+        manzana: { required, minLength: minLength(1) },
+        lote: { required, minLength: minLength(1) },
+        anioActual: { required, minLength: minLength(1) },
+        periodo_inicio: { required, minLength: minLength(1) },
+        periodo_fin: { required, minLength: minLength(1) },
+      };
+    });
+    const v$ = useVuelidate(rulesBusqueda, busqueda);
     const distribucion = ref({
       id: 0,
       manzana: "",
@@ -493,125 +532,127 @@ export default {
         },
       ],
     });
-    const celdas = [
-      {
-        nombre: "Primera planta",
-        celda_a: "",
-        celda_b: "",
-        celda_c: "",
-        celda_d: "",
-        celda_e: "",
-        celda_f: "",
-        celda_g: "",
-        celda_h: "",
-        celda_i: "",
-        celda_j: "",
-        celda_k: "",
-        celda_l: "",
-        celda_m: "",
-        celda_n: "",
-        celda_o: "",
-        celda_p: "",
-        celda_q: "",
-        celda_r: "",
-        celda_s: "",
-        celda_t: "",
-        celda_u: "",
-        celda_v: "",
-        celda_w: "",
-        celda_x: "",
-        celda_y: "",
-        celda_z: "",
-        celda_aa: "",
-        celda_ab: "",
-        celda_ac: "",
-        celda_ad: "",
-        celda_ae: "",
-        celda_af: "",
-        celda_ag: "",
-        celda_ah: "",
-        celda_ai: "",
-        celda_aj: "",
-      },
-      {
-        nombre: "Segunda planta",
-        celda_a: "",
-        celda_b: "",
-        celda_c: "",
-        celda_d: "",
-        celda_e: "",
-        celda_f: "",
-        celda_g: "",
-        celda_h: "",
-        celda_i: "",
-        celda_j: "",
-        celda_k: "",
-        celda_l: "",
-        celda_m: "",
-        celda_n: "",
-        celda_o: "",
-        celda_p: "",
-        celda_q: "",
-        celda_r: "",
-        celda_s: "",
-        celda_t: "",
-        celda_u: "",
-        celda_v: "",
-        celda_w: "",
-        celda_x: "",
-        celda_y: "",
-        celda_z: "",
-        celda_aa: "",
-        celda_ab: "",
-        celda_ac: "",
-        celda_ad: "",
-        celda_ae: "",
-        celda_af: "",
-        celda_ag: "",
-        celda_ah: "",
-        celda_ai: "",
-        celda_aj: "",
-      },
-      {
-        nombre: "Tercera planta",
-        celda_a: "",
-        celda_b: "",
-        celda_c: "",
-        celda_d: "",
-        celda_e: "",
-        celda_f: "",
-        celda_g: "",
-        celda_h: "",
-        celda_i: "",
-        celda_j: "",
-        celda_k: "",
-        celda_l: "",
-        celda_m: "",
-        celda_n: "",
-        celda_o: "",
-        celda_p: "",
-        celda_q: "",
-        celda_r: "",
-        celda_s: "",
-        celda_t: "",
-        celda_u: "",
-        celda_v: "",
-        celda_w: "",
-        celda_x: "",
-        celda_y: "",
-        celda_z: "",
-        celda_aa: "",
-        celda_ab: "",
-        celda_ac: "",
-        celda_ad: "",
-        celda_ae: "",
-        celda_af: "",
-        celda_ag: "",
-        celda_ah: "",
-        celda_ai: "",
-        celda_aj: "",
-      },
-    ];
+    function celdasVacias() {
+      distribucion.value.celdas = [
+        {
+          nombre: "Primera planta",
+          celda_a: "",
+          celda_b: "",
+          celda_c: "",
+          celda_d: "",
+          celda_e: "",
+          celda_f: "",
+          celda_g: "",
+          celda_h: "",
+          celda_i: "",
+          celda_j: "",
+          celda_k: "",
+          celda_l: "",
+          celda_m: "",
+          celda_n: "",
+          celda_o: "",
+          celda_p: "",
+          celda_q: "",
+          celda_r: "",
+          celda_s: "",
+          celda_t: "",
+          celda_u: "",
+          celda_v: "",
+          celda_w: "",
+          celda_x: "",
+          celda_y: "",
+          celda_z: "",
+          celda_aa: "",
+          celda_ab: "",
+          celda_ac: "",
+          celda_ad: "",
+          celda_ae: "",
+          celda_af: "",
+          celda_ag: "",
+          celda_ah: "",
+          celda_ai: "",
+          celda_aj: "",
+        },
+        {
+          nombre: "Segunda planta",
+          celda_a: "",
+          celda_b: "",
+          celda_c: "",
+          celda_d: "",
+          celda_e: "",
+          celda_f: "",
+          celda_g: "",
+          celda_h: "",
+          celda_i: "",
+          celda_j: "",
+          celda_k: "",
+          celda_l: "",
+          celda_m: "",
+          celda_n: "",
+          celda_o: "",
+          celda_p: "",
+          celda_q: "",
+          celda_r: "",
+          celda_s: "",
+          celda_t: "",
+          celda_u: "",
+          celda_v: "",
+          celda_w: "",
+          celda_x: "",
+          celda_y: "",
+          celda_z: "",
+          celda_aa: "",
+          celda_ab: "",
+          celda_ac: "",
+          celda_ad: "",
+          celda_ae: "",
+          celda_af: "",
+          celda_ag: "",
+          celda_ah: "",
+          celda_ai: "",
+          celda_aj: "",
+        },
+        {
+          nombre: "Tercera planta",
+          celda_a: "",
+          celda_b: "",
+          celda_c: "",
+          celda_d: "",
+          celda_e: "",
+          celda_f: "",
+          celda_g: "",
+          celda_h: "",
+          celda_i: "",
+          celda_j: "",
+          celda_k: "",
+          celda_l: "",
+          celda_m: "",
+          celda_n: "",
+          celda_o: "",
+          celda_p: "",
+          celda_q: "",
+          celda_r: "",
+          celda_s: "",
+          celda_t: "",
+          celda_u: "",
+          celda_v: "",
+          celda_w: "",
+          celda_x: "",
+          celda_y: "",
+          celda_z: "",
+          celda_aa: "",
+          celda_ab: "",
+          celda_ac: "",
+          celda_ad: "",
+          celda_ae: "",
+          celda_af: "",
+          celda_ag: "",
+          celda_ah: "",
+          celda_ai: "",
+          celda_aj: "",
+        },
+      ];
+    }
     const lecturaAnterior = ref({});
     const espacios = ref([]);
     const urbanizaciones = ref([]);
@@ -633,16 +674,19 @@ export default {
       });
     }
     function ponerAnio(operacion) {
-      if (operacion == "+") {
-        busqueda.value.anioActual = busqueda.value.anioActual + 2;
-        distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
-        distribucion.value.periodo_fin = busqueda.value.anioActual;
-      } else if (operacion == "-") {
-        busqueda.value.anioActual = busqueda.value.anioActual - 2;
-        distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
-        distribucion.value.periodo_fin = busqueda.value.anioActual;
+      this.v$.$validate();
+      if (!this.v$.$error) {
+        if (operacion == "+") {
+          busqueda.value.anioActual = busqueda.value.anioActual + 2;
+          distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
+          distribucion.value.periodo_fin = busqueda.value.anioActual;
+        } else if (operacion == "-") {
+          busqueda.value.anioActual = busqueda.value.anioActual - 2;
+          distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
+          distribucion.value.periodo_fin = busqueda.value.anioActual;
+        }
       }
-      buscarLectura();
+      this.buscarLectura();
       // busqueda.value.anioActual=anioActual.value-1+'/'+anioActual.value
       // anioAnteriorTexto.value=anioActual.value-2+'/'+anioActual.value-1
       // anioPosteriorTexto.value=anioActual.value+1+'/'+anioActual.value+2
@@ -658,58 +702,108 @@ export default {
       });
     }
     async function guardar() {
-      console.log("busqueda", busqueda.value);
-      distribucion.value.urbanizacion_id = busqueda.value.urbanizacion;
-      distribucion.value.manzana = busqueda.value.manzana;
-      distribucion.value.lote = busqueda.value.lote;
-      await axios.post(`lectura`, distribucion.value).then((res) => {
-        console.log("tag", res.data);
-      });
+      this.v$.$validate();
+      if (!this.v$.$error) {
+        console.log("busqueda", busqueda.value);
+        distribucion.value.urbanizacion_id = busqueda.value.urbanizacion;
+        distribucion.value.manzana = busqueda.value.manzana;
+        distribucion.value.lote = busqueda.value.lote;
+        console.log("distribucion antes de guardar", distribucion.value);
+
+        await axios.post(`lectura`, distribucion.value).then((res) => {
+          if (res.data == 1) {
+            console.log("tag", res.data);
+            Swal.fire({
+              icon: "success",
+              title: "Buenas noticias",
+              text: "Lectura guardada satisfactoriamente",
+            });
+
+            this.limpiarForm();
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Opps",
+              text: "Ocurrió problema, intentelo mas tarde",
+            });
+          }
+        });
+      }
+    }
+    function limpiarForm() {
+      console.log("limpieza", "inicio");
+      distribucion.value.id = 0;
+      distribucion.value.manzana = "";
+      distribucion.value.lote = "";
+      distribucion.value.urbanizacion_id = 0;
+      this.celdasVacias();
+
+      busqueda.value.urbanizacion = "";
+      busqueda.value.manzana = "";
+      busqueda.value.lote = "";
+      rpt.value = 0;
+      console.log("limpieza", "fin");
+      console.log("distribucion", distribucion.value);
     }
     async function buscarLectura() {
-      busqueda.value.periodo_inicio = distribucion.value.periodo_inicio;
-      busqueda.value.periodo_fin = distribucion.value.periodo_fin;
+      this.v$.$validate();
+      if (!this.v$.$error) {
+        busqueda.value.periodo_inicio = distribucion.value.periodo_inicio;
+        busqueda.value.periodo_fin = distribucion.value.periodo_fin;
 
-      console.log("busqueda", busqueda.value);
+        console.log("busqueda", busqueda.value);
 
-      await axios.post(`lectura-buscar`, busqueda.value).then((res) => {
-        console.log("lectura-buscar", res.data);
-        rpt.value = 0;
-        distribucion.value.id = 0;
-        distribucion.value.celdas = celdas;
-
-        if (res.data.rpt >= 1) {
-          if (res.data.rpt == 1) {
-            rpt.value = 1;
-            distribucion.value = res.data.lectura;
-            alert("Se encontro un registro");
-          } else if (res.data.rpt == 2) {
-            rpt.value = 2;
-            // distribucion.value = res.data.lecturaAnterior;
-            // distribucion.value.id = 0;
-            // distribucion.value.periodo_inicio =
-            //   parseInt(distribucion.value.periodo_inicio) + 2;
-            // distribucion.value.periodo_fin =
-            //   parseInt(distribucion.value.periodo_fin) + 2;
-            lecturaAnterior.value = res.data.lecturaAnterior;
-            lecturaAnterior.value.id = 0;
-            lecturaAnterior.value.periodo_inicio =
-              parseInt(lecturaAnterior.value.periodo_inicio) + 2;
-            lecturaAnterior.value.periodo_fin =
-              parseInt(lecturaAnterior.value.periodo_fin) + 2;
-            alert(
-              `Se encontro un registro del periodo[${
-                parseInt(distribucion.value.periodo_inicio) - 2
-              }/${parseInt(distribucion.value.periodo_fin) - 2}]`
-            );
-          }
-        } else {
+        await axios.post(`lectura-buscar`, busqueda.value).then((res) => {
+          console.log("lectura-buscar", res.data);
           rpt.value = 0;
           distribucion.value.id = 0;
-          distribucion.value.celdas = celdas;
-          alert("No se encontro un registro");
-        }
-      });
+          this.celdasVacias();
+
+          if (res.data.rpt >= 1) {
+            if (res.data.rpt == 1) {
+              rpt.value = 1;
+              distribucion.value = res.data.lectura;
+              Swal.fire({
+                icon: "success",
+                title: "Buenas noticias",
+                text: "Se encontro un registro",
+              });
+            } else if (res.data.rpt == 2) {
+              rpt.value = 2;
+              // distribucion.value = res.data.lecturaAnterior;
+              // distribucion.value.id = 0;
+              // distribucion.value.periodo_inicio =
+              //   parseInt(distribucion.value.periodo_inicio) + 2;
+              // distribucion.value.periodo_fin =
+              //   parseInt(distribucion.value.periodo_fin) + 2;
+              lecturaAnterior.value = res.data.lecturaAnterior;
+              lecturaAnterior.value.id = 0;
+              lecturaAnterior.value.periodo_inicio =
+                parseInt(lecturaAnterior.value.periodo_inicio) + 2;
+              lecturaAnterior.value.periodo_fin =
+                parseInt(lecturaAnterior.value.periodo_fin) + 2;
+
+              Swal.fire({
+                icon: "warning",
+                title: "Opps",
+                text: `No se encontro registros, pero hay un registro del periodo[${
+                  parseInt(distribucion.value.periodo_inicio) - 2
+                }/${parseInt(distribucion.value.periodo_fin) - 2}]`,
+              });
+            }
+          } else {
+            rpt.value = 0;
+            distribucion.value.id = 0;
+            this.celdasVacias();
+
+            Swal.fire({
+              icon: "warning",
+              title: "Opps",
+              text: "No se encontro registros",
+            });
+          }
+        });
+      }
     }
     function mostrarLecturaAnterior() {
       distribucion.value = lecturaAnterior.value;
@@ -728,6 +822,7 @@ export default {
       asignarColor,
       mostrarValor,
       busqueda,
+      v$,
       // anioActual,
       // anioAnteriorTexto,
       // anioPosteriorTexto,
@@ -736,9 +831,10 @@ export default {
       buscarLectura,
       getUrbanizaciones,
       getEspacios,
-      celdas,
+      celdasVacias,
       lecturaAnterior,
       mostrarLecturaAnterior,
+      limpiarForm,
     };
   },
 };
