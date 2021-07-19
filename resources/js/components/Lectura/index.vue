@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-header">
-        <h2>Distribucion de su casa</h2>
+        <h2>Distribucion de su casa {{ busqueda.anioActual }}</h2>
       </div>
       <div class="card-body">
         <div class="row">
@@ -39,6 +39,7 @@
                 id="manzana"
                 placeholder="Ejemlo: A"
                 v-model="busqueda.manzana"
+                @keyup="mayusculasM(busqueda.manzana)"
               >
               <span
                 v-if="v$.manzana.$error"
@@ -58,6 +59,7 @@
                 id="lote"
                 placeholder="Ejemlo: 5"
                 v-model="busqueda.lote"
+                @keyup="mayusculasL(busqueda.lote)"
               >
               <span
                 v-if="v$.lote.$error"
@@ -139,7 +141,6 @@
                     <table class="table table-bordered table-striped puntero">
                       <tr>
                         <td
-                          class="cur"
                           @click="asignarColor('celda_a',index)"
                           :class="mostrarValor(celda.celda_a)"
                         ></td>
@@ -324,7 +325,8 @@
                 <div class="row">
                   <div class="col-12">
                     <button
-                      class="btn btn-secondary btn-block btn-lg"
+                      :disabled="(busqueda.anioActual-3)<2000"
+                      class="btn btn-block btn-lg"
                       @click="ponerAnio('-')"
                     >
                       <b>{{ (busqueda.anioActual-3)+'/'+(busqueda.anioActual-2) }}</b>
@@ -345,10 +347,11 @@
                   <div
                     v-show="false"
                     class="col-12"
-                  ><button class="btn btn-primary btn-block btn-lg"><b>{{ (busqueda.anioActual-1)+'/'+busqueda.anioActual }}</b></button> </div>
+                  ><button class="btn btn-block btn-lg"><b>{{ (busqueda.anioActual-1)+'/'+busqueda.anioActual }}</b></button> </div>
                   <div class="col-12">
                     <button
-                      class="btn btn-secondary btn-block btn-lg"
+                      :disabled="busqueda.anioActual+1> fecha.getFullYear()"
+                      class="btn btn-block btn-lg"
                       @click="ponerAnio('+')"
                     >
                       <svg
@@ -368,6 +371,49 @@
                 </div>
               </div>
             </div>
+            <div class="card bg-primary">
+              <div
+                class="text-white card-body"
+                style="font-size:15px;"
+              >
+                Codigo:{{ codigo }}
+                <button
+                  class="btn btn-sm btn-secondary btn-block"
+                  v-clipboard:copy="codigo"
+                  v-clipboard:success="onCopy"
+                  v-clipboard:error="onError"
+                > <span v-if="!copiado">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-clipboard"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                    </svg>
+                  </span><span v-if="copiado">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      class="bi bi-clipboard-check"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"
+                      />
+                      <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                      <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                    </svg>
+                  </span> {{copiado?'copiado':'copiar'}}</button>
+
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -378,20 +424,26 @@
 import { computed, reactive, ref, toRefs, onMounted } from "vue";
 
 import Swal from "sweetalert2";
-
 import { useVuelidate } from "@vuelidate/core";
 import { required, minLength, helpers } from "@vuelidate/validators";
+// import moment from "moment";
 
+import moment from "moment";
 export default {
   setup() {
+    // const fechita = moment().locale("es_PE");
+    let fecha = new Date();
+    fecha.setHours(fecha.getHours() - 5);
+    const copiado = ref(false);
     const rpt = ref(0);
+    const codigo = ref("");
     const busqueda = ref({
       urbanizacion: "",
       manzana: "",
       lote: "",
-      anioActual: new Date().getFullYear(),
-      periodo_inicio: new Date().getFullYear() - 1,
-      periodo_fin: new Date().getFullYear(),
+      anioActual: fecha.getFullYear(),
+      periodo_inicio: fecha.getFullYear() - 1,
+      periodo_fin: fecha.getFullYear(),
     });
     const mustBeLearnVue = (value) => value.includes("learnvue");
     const rulesBusqueda = computed(() => {
@@ -410,125 +462,125 @@ export default {
       manzana: "",
       lote: "",
       urbanizacion_id: "0",
-      periodo_inicio: new Date().getFullYear() - 1,
-      periodo_fin: new Date().getFullYear(),
+      periodo_inicio: fecha.getFullYear() - 1,
+      periodo_fin: fecha.getFullYear(),
       celdas: [
         {
           nombre: "Primera planta",
-          celda_a: "",
-          celda_b: "",
-          celda_c: "",
-          celda_d: "",
-          celda_e: "",
-          celda_f: "",
-          celda_g: "",
-          celda_h: "",
-          celda_i: "",
-          celda_j: "",
-          celda_k: "",
-          celda_l: "",
-          celda_m: "",
-          celda_n: "",
-          celda_o: "",
-          celda_p: "",
-          celda_q: "",
-          celda_r: "",
-          celda_s: "",
-          celda_t: "",
-          celda_u: "",
-          celda_v: "",
-          celda_w: "",
-          celda_x: "",
-          celda_y: "",
-          celda_z: "",
-          celda_aa: "",
-          celda_ab: "",
-          celda_ac: "",
-          celda_ad: "",
-          celda_ae: "",
-          celda_af: "",
-          celda_ag: "",
-          celda_ah: "",
-          celda_ai: "",
-          celda_aj: "",
+          celda_a: "7",
+          celda_b: "7",
+          celda_c: "7",
+          celda_d: "7",
+          celda_e: "7",
+          celda_f: "7",
+          celda_g: "7",
+          celda_h: "7",
+          celda_i: "7",
+          celda_j: "7",
+          celda_k: "7",
+          celda_l: "7",
+          celda_m: "7",
+          celda_n: "7",
+          celda_o: "7",
+          celda_p: "7",
+          celda_q: "7",
+          celda_r: "7",
+          celda_s: "7",
+          celda_t: "7",
+          celda_u: "7",
+          celda_v: "7",
+          celda_w: "7",
+          celda_x: "7",
+          celda_y: "7",
+          celda_z: "7",
+          celda_aa: "7",
+          celda_ab: "7",
+          celda_ac: "7",
+          celda_ad: "7",
+          celda_ae: "7",
+          celda_af: "7",
+          celda_ag: "7",
+          celda_ah: "7",
+          celda_ai: "7",
+          celda_aj: "7",
         },
         {
           nombre: "Segunda planta",
-          celda_a: "",
-          celda_b: "",
-          celda_c: "",
-          celda_d: "",
-          celda_e: "",
-          celda_f: "",
-          celda_g: "",
-          celda_h: "",
-          celda_i: "",
-          celda_j: "",
-          celda_k: "",
-          celda_l: "",
-          celda_m: "",
-          celda_n: "",
-          celda_o: "",
-          celda_p: "",
-          celda_q: "",
-          celda_r: "",
-          celda_s: "",
-          celda_t: "",
-          celda_u: "",
-          celda_v: "",
-          celda_w: "",
-          celda_x: "",
-          celda_y: "",
-          celda_z: "",
-          celda_aa: "",
-          celda_ab: "",
-          celda_ac: "",
-          celda_ad: "",
-          celda_ae: "",
-          celda_af: "",
-          celda_ag: "",
-          celda_ah: "",
-          celda_ai: "",
-          celda_aj: "",
+          celda_a: "7",
+          celda_b: "7",
+          celda_c: "7",
+          celda_d: "7",
+          celda_e: "7",
+          celda_f: "7",
+          celda_g: "7",
+          celda_h: "7",
+          celda_i: "7",
+          celda_j: "7",
+          celda_k: "7",
+          celda_l: "7",
+          celda_m: "7",
+          celda_n: "7",
+          celda_o: "7",
+          celda_p: "7",
+          celda_q: "7",
+          celda_r: "7",
+          celda_s: "7",
+          celda_t: "7",
+          celda_u: "7",
+          celda_v: "7",
+          celda_w: "7",
+          celda_x: "7",
+          celda_y: "7",
+          celda_z: "7",
+          celda_aa: "7",
+          celda_ab: "7",
+          celda_ac: "7",
+          celda_ad: "7",
+          celda_ae: "7",
+          celda_af: "7",
+          celda_ag: "7",
+          celda_ah: "7",
+          celda_ai: "7",
+          celda_aj: "7",
         },
         {
           nombre: "Tercera planta",
-          celda_a: "",
-          celda_b: "",
-          celda_c: "",
-          celda_d: "",
-          celda_e: "",
-          celda_f: "",
-          celda_g: "",
-          celda_h: "",
-          celda_i: "",
-          celda_j: "",
-          celda_k: "",
-          celda_l: "",
-          celda_m: "",
-          celda_n: "",
-          celda_o: "",
-          celda_p: "",
-          celda_q: "",
-          celda_r: "",
-          celda_s: "",
-          celda_t: "",
-          celda_u: "",
-          celda_v: "",
-          celda_w: "",
-          celda_x: "",
-          celda_y: "",
-          celda_z: "",
-          celda_aa: "",
-          celda_ab: "",
-          celda_ac: "",
-          celda_ad: "",
-          celda_ae: "",
-          celda_af: "",
-          celda_ag: "",
-          celda_ah: "",
-          celda_ai: "",
-          celda_aj: "",
+          celda_a: "7",
+          celda_b: "7",
+          celda_c: "7",
+          celda_d: "7",
+          celda_e: "7",
+          celda_f: "7",
+          celda_g: "7",
+          celda_h: "7",
+          celda_i: "7",
+          celda_j: "7",
+          celda_k: "7",
+          celda_l: "7",
+          celda_m: "7",
+          celda_n: "7",
+          celda_o: "7",
+          celda_p: "7",
+          celda_q: "7",
+          celda_r: "7",
+          celda_s: "7",
+          celda_t: "7",
+          celda_u: "7",
+          celda_v: "7",
+          celda_w: "7",
+          celda_x: "7",
+          celda_y: "7",
+          celda_z: "7",
+          celda_aa: "7",
+          celda_ab: "7",
+          celda_ac: "7",
+          celda_ad: "7",
+          celda_ae: "7",
+          celda_af: "7",
+          celda_ag: "7",
+          celda_ah: "7",
+          celda_ai: "7",
+          celda_aj: "7",
         },
       ],
     });
@@ -536,120 +588,120 @@ export default {
       distribucion.value.celdas = [
         {
           nombre: "Primera planta",
-          celda_a: "",
-          celda_b: "",
-          celda_c: "",
-          celda_d: "",
-          celda_e: "",
-          celda_f: "",
-          celda_g: "",
-          celda_h: "",
-          celda_i: "",
-          celda_j: "",
-          celda_k: "",
-          celda_l: "",
-          celda_m: "",
-          celda_n: "",
-          celda_o: "",
-          celda_p: "",
-          celda_q: "",
-          celda_r: "",
-          celda_s: "",
-          celda_t: "",
-          celda_u: "",
-          celda_v: "",
-          celda_w: "",
-          celda_x: "",
-          celda_y: "",
-          celda_z: "",
-          celda_aa: "",
-          celda_ab: "",
-          celda_ac: "",
-          celda_ad: "",
-          celda_ae: "",
-          celda_af: "",
-          celda_ag: "",
-          celda_ah: "",
-          celda_ai: "",
-          celda_aj: "",
+          celda_a: "7",
+          celda_b: "7",
+          celda_c: "7",
+          celda_d: "7",
+          celda_e: "7",
+          celda_f: "7",
+          celda_g: "7",
+          celda_h: "7",
+          celda_i: "7",
+          celda_j: "7",
+          celda_k: "7",
+          celda_l: "7",
+          celda_m: "7",
+          celda_n: "7",
+          celda_o: "7",
+          celda_p: "7",
+          celda_q: "7",
+          celda_r: "7",
+          celda_s: "7",
+          celda_t: "7",
+          celda_u: "7",
+          celda_v: "7",
+          celda_w: "7",
+          celda_x: "7",
+          celda_y: "7",
+          celda_z: "7",
+          celda_aa: "7",
+          celda_ab: "7",
+          celda_ac: "7",
+          celda_ad: "7",
+          celda_ae: "7",
+          celda_af: "7",
+          celda_ag: "7",
+          celda_ah: "7",
+          celda_ai: "7",
+          celda_aj: "7",
         },
         {
           nombre: "Segunda planta",
-          celda_a: "",
-          celda_b: "",
-          celda_c: "",
-          celda_d: "",
-          celda_e: "",
-          celda_f: "",
-          celda_g: "",
-          celda_h: "",
-          celda_i: "",
-          celda_j: "",
-          celda_k: "",
-          celda_l: "",
-          celda_m: "",
-          celda_n: "",
-          celda_o: "",
-          celda_p: "",
-          celda_q: "",
-          celda_r: "",
-          celda_s: "",
-          celda_t: "",
-          celda_u: "",
-          celda_v: "",
-          celda_w: "",
-          celda_x: "",
-          celda_y: "",
-          celda_z: "",
-          celda_aa: "",
-          celda_ab: "",
-          celda_ac: "",
-          celda_ad: "",
-          celda_ae: "",
-          celda_af: "",
-          celda_ag: "",
-          celda_ah: "",
-          celda_ai: "",
-          celda_aj: "",
+          celda_a: "7",
+          celda_b: "7",
+          celda_c: "7",
+          celda_d: "7",
+          celda_e: "7",
+          celda_f: "7",
+          celda_g: "7",
+          celda_h: "7",
+          celda_i: "7",
+          celda_j: "7",
+          celda_k: "7",
+          celda_l: "7",
+          celda_m: "7",
+          celda_n: "7",
+          celda_o: "7",
+          celda_p: "7",
+          celda_q: "7",
+          celda_r: "7",
+          celda_s: "7",
+          celda_t: "7",
+          celda_u: "7",
+          celda_v: "7",
+          celda_w: "7",
+          celda_x: "7",
+          celda_y: "7",
+          celda_z: "7",
+          celda_aa: "7",
+          celda_ab: "7",
+          celda_ac: "7",
+          celda_ad: "7",
+          celda_ae: "7",
+          celda_af: "7",
+          celda_ag: "7",
+          celda_ah: "7",
+          celda_ai: "7",
+          celda_aj: "7",
         },
         {
           nombre: "Tercera planta",
-          celda_a: "",
-          celda_b: "",
-          celda_c: "",
-          celda_d: "",
-          celda_e: "",
-          celda_f: "",
-          celda_g: "",
-          celda_h: "",
-          celda_i: "",
-          celda_j: "",
-          celda_k: "",
-          celda_l: "",
-          celda_m: "",
-          celda_n: "",
-          celda_o: "",
-          celda_p: "",
-          celda_q: "",
-          celda_r: "",
-          celda_s: "",
-          celda_t: "",
-          celda_u: "",
-          celda_v: "",
-          celda_w: "",
-          celda_x: "",
-          celda_y: "",
-          celda_z: "",
-          celda_aa: "",
-          celda_ab: "",
-          celda_ac: "",
-          celda_ad: "",
-          celda_ae: "",
-          celda_af: "",
-          celda_ag: "",
-          celda_ah: "",
-          celda_ai: "",
-          celda_aj: "",
+          celda_a: "7",
+          celda_b: "7",
+          celda_c: "7",
+          celda_d: "7",
+          celda_e: "7",
+          celda_f: "7",
+          celda_g: "7",
+          celda_h: "7",
+          celda_i: "7",
+          celda_j: "7",
+          celda_k: "7",
+          celda_l: "7",
+          celda_m: "7",
+          celda_n: "7",
+          celda_o: "7",
+          celda_p: "7",
+          celda_q: "7",
+          celda_r: "7",
+          celda_s: "7",
+          celda_t: "7",
+          celda_u: "7",
+          celda_v: "7",
+          celda_w: "7",
+          celda_x: "7",
+          celda_y: "7",
+          celda_z: "7",
+          celda_aa: "7",
+          celda_ab: "7",
+          celda_ac: "7",
+          celda_ad: "7",
+          celda_ae: "7",
+          celda_af: "7",
+          celda_ag: "7",
+          celda_ah: "7",
+          celda_ai: "7",
+          celda_aj: "7",
         },
       ];
     }
@@ -663,7 +715,7 @@ export default {
       console.log("celdaCurrent", espacio.value.id);
     }
     function asignarColor(celdaPicada, index) {
-      if (!espacio.value) {
+      if (!espacio.value.id) {
         alert("Escoja un color de la lista");
       }
       distribucion.value.celdas[index][celdaPicada] = espacio.value.id;
@@ -692,7 +744,7 @@ export default {
       // anioPosteriorTexto.value=anioActual.value+1+'/'+anioActual.value+2
     }
     function getUrbanizaciones() {
-      axios.get("urbanizacion").then((res) => {
+      axios.get("urbanizacion-api").then((res) => {
         urbanizaciones.value = res.data;
       });
     }
@@ -711,14 +763,15 @@ export default {
         console.log("distribucion antes de guardar", distribucion.value);
 
         await axios.post(`lectura`, distribucion.value).then((res) => {
-          if (res.data == 1) {
+          console.log("mensaje", res);
+          if (res.data.messaje == 1) {
             console.log("tag", res.data);
+            codigo.value = res.data.codigo;
             Swal.fire({
               icon: "success",
               title: "Buenas noticias",
-              text: "Lectura guardada satisfactoriamente",
+              text: "Lectura guardada satisfactoriamente, encuentra tu codigo aqui -->",
             });
-
             this.limpiarForm();
           } else {
             Swal.fire({
@@ -733,14 +786,14 @@ export default {
     function limpiarForm() {
       console.log("limpieza", "inicio");
       distribucion.value.id = 0;
-      distribucion.value.manzana = "";
-      distribucion.value.lote = "";
-      distribucion.value.urbanizacion_id = 0;
-      this.celdasVacias();
+      //   distribucion.value.manzana = "";
+      //   distribucion.value.lote = "";
+      //   distribucion.value.urbanizacion_id = 0;
+      //   this.celdasVacias();
 
-      busqueda.value.urbanizacion = "";
-      busqueda.value.manzana = "";
-      busqueda.value.lote = "";
+      //   busqueda.value.urbanizacion = "";
+      //   busqueda.value.manzana = "";
+      //   busqueda.value.lote = "";
       rpt.value = 0;
       console.log("limpieza", "fin");
       console.log("distribucion", distribucion.value);
@@ -770,12 +823,15 @@ export default {
               });
             } else if (res.data.rpt == 2) {
               rpt.value = 2;
-              // distribucion.value = res.data.lecturaAnterior;
-              // distribucion.value.id = 0;
-              // distribucion.value.periodo_inicio =
-              //   parseInt(distribucion.value.periodo_inicio) + 2;
-              // distribucion.value.periodo_fin =
-              //   parseInt(distribucion.value.periodo_fin) + 2;
+              distribucion.value = res.data.lecturaAnterior;
+              distribucion.value.id = 0;
+              distribucion.value.periodo_inicio = parseInt(
+                distribucion.value.periodo_inicio
+              );
+              distribucion.value.periodo_fin = parseInt(
+                distribucion.value.periodo_fin
+              );
+
               lecturaAnterior.value = res.data.lecturaAnterior;
               lecturaAnterior.value.id = 0;
               lecturaAnterior.value.periodo_inicio =
@@ -808,7 +864,22 @@ export default {
     function mostrarLecturaAnterior() {
       distribucion.value = lecturaAnterior.value;
     }
+    const onCopy = () => {
+      //   alert("Acabas de copiar el siguiente texto en el portapapeles: ");
+      copiado.value = !copiado.value;
+    };
+    const onError = () => {
+      alert("No se pudo copiar el texto al portapapeles");
+      console.log(e);
+    };
+    function mayusculasM(valor) {
+      busqueda.value.manzana = valor.toUpperCase();
+    }
+    function mayusculasL(valor) {
+      busqueda.value.lote = valor.toUpperCase();
+    }
     onMounted(() => {
+      //   this.moment = moment;
       getUrbanizaciones();
       getEspacios();
     });
@@ -835,7 +906,20 @@ export default {
       lecturaAnterior,
       mostrarLecturaAnterior,
       limpiarForm,
+      codigo,
+      onCopy,
+      onError,
+      copiado,
+      mayusculasM,
+      mayusculasL,
+      fecha,
     };
   },
 };
 </script>
+<style>
+table tr td {
+  width: 35px;
+  height: 40px;
+}
+</style>

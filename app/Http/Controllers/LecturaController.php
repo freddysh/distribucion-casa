@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Lectura;
 use App\Models\Celda;
+use App\Models\Espacio;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Image;
 
 class LecturaController extends Controller
 {
@@ -92,13 +96,13 @@ class LecturaController extends Controller
             elseif($request->id>0)
                 $lectura= Lectura::find($request->id);
 
-            $lectura->manzana=$request->manzana;
-            $lectura->lote=$request->lote;
+            $lectura->manzana=strtoupper($request->manzana);
+            $lectura->lote=strtoupper($request->lote);
             $lectura->imagen='';
             $lectura->periodo_inicio=$request->periodo_inicio;
             $lectura->periodo_fin=$request->periodo_fin;
             $lectura->urbanizacion_id=$request->urbanizacion_id;
-            $lectura->codigo=substr($request->periodo_inicio, 2, 4).substr($request->periodo_fin, 2, 4).$request->urbanizacion_id.$request->manzana.$request->lote;
+            $lectura->codigo=strtoupper($request->urbanizacion_id.$request->manzana.$request->lote);
             $lectura->save();
 
             if($request->id>0){
@@ -147,12 +151,142 @@ class LecturaController extends Controller
                 $celdita->lectura_id=$lectura->id;
                 $celdita->save();
             }
-            return '1';
+            // guardamos el pdf con las lectura
+            $espacio=Espacio::all();
+            $espacios=[];
+            foreach ($espacio as $key => $value) {
+                # code...
+                $espacios[$value->id]=$value->color;
+            }
+            // return $espacios;
+            $pdf_doc = \PDF::loadView('export_pdf', ['espacios'=>$espacios,'lectura'=>$lectura]);
+            // return $pdf_doc->download('pdf.pdf');
+            $filename='lectura_'.$lectura->id.'.pdf';
+            // Storage::put($filename, $pdf_doc->output());
+
+            Storage::disk('lecturas')->put($filename,$pdf_doc->output());
+            //guardamos en formato jpej
+            $pathToPdf=Storage::disk('lecturas')->path('/').$filename;
+            $pathToWhereImageShouldBeStored=Storage::disk('lecturas')->path('/').'lectura_'.$lectura->id;
+            $pdf = new \Spatie\PdfToImage\Pdf($pathToPdf);
+            $pdf->setOutputFormat('jpeg')
+                ->saveImage($pathToWhereImageShouldBeStored);
+
+            $img = Image::make($pathToWhereImageShouldBeStored.'.jpeg');
+            // crop image
+            $img->crop(1000, 400, 50, 80);
+            // $img->resize(230, 125);
+            $img->save($pathToWhereImageShouldBeStored.'.jpeg');
+            Storage::disk('lecturas')->delete($filename);
+            $lectura->imagen='lectura_'.$lectura->id.'.jpeg';
+            $lectura->save();
+            return response()->json(['messaje'=>'1','codigo'=>$lectura->codigo]) ;
         } catch (\Throwable $th) {
             //throw $th;
             return $th;
         }
 
+    }
+    public function reporte_lecturas_api(){
+        $lecturas=Lectura::with('urbanizacion','celdas')->get();
+        $espacios=Espacio::get();
+        // return $espacios;
+        // return $lecturas;
+        // $arreglo=Array('Urbanizacion','Manzana','Lote','Codigo','Año','Sala/comedor','Cocina','Dormitorio','Baño','Otro(techado)');
+        foreach ($lecturas as $key => $lectura) {
+            $arreglo['urbanizacion'][]=$lectura->urbanizacion->nombre;
+            $arreglo['manzana'][]=$lectura->manzana;
+            $arreglo['lote'][]=$lectura->lote;
+            $arreglo['codigo'][]=$lectura->codigo;
+            $arreglo['anio'][]=$lectura->periodo_inicio.'-'.$lectura->periodo_fin;
+            foreach ($espacios as $key2 => $espacio) {
+                $salsa_comedor='';
+                foreach ($lectura->celdas as $key1 => $celda) {
+                    // return  strval($espacio->id);
+                $salsa_comedor.=$celda->celda_a==$espacio->id?'P'.($key1+1).'_celdaA,':'';
+                $salsa_comedor.=$celda->celda_b==$espacio->id?'P'.($key1+1).'_celdaB,':'';
+                $salsa_comedor.=$celda->celda_c==$espacio->id?'P'.($key1+1).'_celdaC,':'';
+                $salsa_comedor.=$celda->celda_d==$espacio->id?'P'.($key1+1).'_celdaD,':'';
+                $salsa_comedor.=$celda->celda_e==$espacio->id?'P'.($key1+1).'_celdaE,':'';
+                $salsa_comedor.=$celda->celda_f==$espacio->id?'P'.($key1+1).'_celdaF,':'';
+                $salsa_comedor.=$celda->celda_g==$espacio->id?'P'.($key1+1).'_celdaG,':'';
+                $salsa_comedor.=$celda->celda_h==$espacio->id?'P'.($key1+1).'_celdaH,':'';
+                $salsa_comedor.=$celda->celda_i==$espacio->id?'P'.($key1+1).'_celdaI,':'';
+                $salsa_comedor.=$celda->celda_j==$espacio->id?'P'.($key1+1).'_celdaJ,':'';
+                $salsa_comedor.=$celda->celda_k==$espacio->id?'P'.($key1+1).'_celdaK,':'';
+                $salsa_comedor.=$celda->celda_l==$espacio->id?'P'.($key1+1).'_celdaL,':'';
+                $salsa_comedor.=$celda->celda_m==$espacio->id?'P'.($key1+1).'_celdaM,':'';
+                $salsa_comedor.=$celda->celda_n==$espacio->id?'P'.($key1+1).'_celdaN,':'';
+                $salsa_comedor.=$celda->celda_o==$espacio->id?'P'.($key1+1).'_celdaO,':'';
+                $salsa_comedor.=$celda->celda_p==$espacio->id?'P'.($key1+1).'_celdaP,':'';
+                $salsa_comedor.=$celda->celda_q==$espacio->id?'P'.($key1+1).'_celdaQ,':'';
+                $salsa_comedor.=$celda->celda_r==$espacio->id?'P'.($key1+1).'_celdaR,':'';
+                $salsa_comedor.=$celda->celda_s==$espacio->id?'P'.($key1+1).'_celdaS,':'';
+                $salsa_comedor.=$celda->celda_t==$espacio->id?'P'.($key1+1).'_celdaT,':'';
+                $salsa_comedor.=$celda->celda_u==$espacio->id?'P'.($key1+1).'_celdaU,':'';
+                $salsa_comedor.=$celda->celda_v==$espacio->id?'P'.($key1+1).'_celdaV,':'';
+                $salsa_comedor.=$celda->celda_w==$espacio->id?'P'.($key1+1).'_celdaW,':'';
+                $salsa_comedor.=$celda->celda_x==$espacio->id?'P'.($key1+1).'_celdaX,':'';
+                $salsa_comedor.=$celda->celda_y==$espacio->id?'P'.($key1+1).'_celdaY,':'';
+                $salsa_comedor.=$celda->celda_z==$espacio->id?'P'.($key1+1).'_celdaZ,':'';
+                $salsa_comedor.=$celda->celda_aa==$espacio->id?'P'.($key1+1).'_celdaAA,':'';
+                $salsa_comedor.=$celda->celda_ab==$espacio->id?'P'.($key1+1).'_celdaAB,':'';
+                $salsa_comedor.=$celda->celda_ac==$espacio->id?'P'.($key1+1).'_celdaAC,':'';
+                $salsa_comedor.=$celda->celda_ad==$espacio->id?'P'.($key1+1).'_celdaAD,':'';
+                $salsa_comedor.=$celda->celda_ae==$espacio->id?'P'.($key1+1).'_celdaAE,':'';
+                $salsa_comedor.=$celda->celda_af==$espacio->id?'P'.($key1+1).'_celdaAF,':'';
+                $salsa_comedor.=$celda->celda_ag==$espacio->id?'P'.($key1+1).'_celdaAG,':'';
+                $salsa_comedor.=$celda->celda_ah==$espacio->id?'P'.($key1+1).'_celdaAH,':'';
+                $salsa_comedor.=$celda->celda_ai==$espacio->id?'P'.($key1+1).'_celdaAI,':'';
+                $salsa_comedor.=$celda->celda_aj==$espacio->id?'P'.($key1+1).'_celdaAJ,':'';
+                }
+                $arreglo[strval($espacio->id)][]=$salsa_comedor;
+            }
+
+
+        }
+        return json_encode($arreglo);
+        // return $arreglo;
+    }
+    public function reporte_lecturas_api_anios(){
+        $lecturas=Lectura::get()->groupBy('periodo_fin');
+        // $lecturas=Lectura::get();
+    // return $lecturas;
+
+        $arreglo=[];
+        foreach ($lecturas as $key => $value) {
+            foreach ($value as $key1 => $value1) {
+                if(array_key_exists($key,$arreglo)){
+                    $arreglo[$key][$value1->codigo]=$value1->id;
+                }
+                else{
+                    $arreglo[$key]= array($value1->codigo=>$value1->id);
+
+                }
+            }
+
+        }
+        ksort($arreglo);
+        $arregloSort=[];
+        $casas=Lectura::select('codigo')->distinct()->get();
+        //return $casas;
+        foreach ($casas as $key2 => $casa) {
+            foreach ($arreglo as $key => $value) {
+
+                if(!array_key_exists($casa->codigo,$value)){
+
+                    $arreglo[$key][$casa->codigo]='';
+                }
+                // ksort($value);
+                // $arregloSort[$key]=$value;
+            }
+        }
+        foreach ($arreglo as $key => $value) {
+            ksort($value);
+            $arregloSort[$key]=$value;
+        }
+
+        return $arregloSort;
     }
 
     /**
@@ -161,11 +295,24 @@ class LecturaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function reporte_lecturas()
     {
         //
-    }
 
+        return view('show');
+    }
+    public function reporte_lecturas_anios()
+    {
+        //
+
+        return view('show-anios');
+    }
+    public function reporte_lecturas_anios_imagen($id)
+    {
+        $lectura=Lectura::find($id);
+        $file = Storage::disk('lecturas')->get($lectura->imagen);
+        return response($file, 200);
+    }
     /**
      * Show the form for editing the specified resource.
      *

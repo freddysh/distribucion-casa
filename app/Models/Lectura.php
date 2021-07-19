@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Celda;
+use App\Models\Urbanizacion;
+
 
 class Lectura extends Model
 {
@@ -12,6 +14,10 @@ class Lectura extends Model
     public function celdas()
     {
         return $this->hasMany(Celda::class,'lectura_id');
+    }
+    public function urbanizacion()
+    {
+        return $this->belongsTo(Urbanizacion::class,'urbanizacion_id');
     }
 
 }
