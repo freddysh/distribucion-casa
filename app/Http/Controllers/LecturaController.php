@@ -166,6 +166,11 @@ class LecturaController extends Controller
 
             Storage::disk('lecturas')->put($filename,$pdf_doc->output());
             //guardamos en formato jpej
+
+            // en caso de no estar instalado descargar de la web la libreria https://www.ghostscript.com/download/gsdnld.html
+            // configurar la ruta donde se instalo gswin64c.exe
+            // Ghostscript::setGsPath("C:\Program Files\gs\gs9.54.0\bin\gswin64c.exe");
+
             $pathToPdf=Storage::disk('lecturas')->path('/').$filename;
             $pathToWhereImageShouldBeStored=Storage::disk('lecturas')->path('/').'lectura_'.$lectura->id;
             $pdf = new \Spatie\PdfToImage\Pdf($pathToPdf);
