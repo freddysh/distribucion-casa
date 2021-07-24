@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Espacio;
 use Illuminate\Http\Request;
-use App\models\Espacio;
 
 class EspacioController extends Controller
 {
