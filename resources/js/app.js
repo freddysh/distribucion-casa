@@ -35,13 +35,35 @@ require('./bootstrap');
 //     el: '#app',
 // });
 import { createApp } from 'vue';
+// import VueSweetalert2 from 'vue-sweetalert2';
+// import 'sweetalert2/dist/sweetalert2.min.css';
+
+// Mis componentes
 import LecturaComponent from './components/Lectura/index';
 import ExampleComponent from './components/ExampleComponent';
+import LecturaShowComponent from './components/Lectura/show';
+import LecturaShowAniosComponent from './components/Lectura/show-anios';
+import UrbanizacionComponent from './components/urbanizacion/index';
+
+// import Toasted from 'vue-toasted/dist/vue-toasted';
+// var Toasted = require('vue-toasted').default
 // const { createApp, ref, reactive, toRefs, watch, computed } = require('vue');
+// import VueClipboard from 'vue-clipboard2'
+import { VueClipboard } from '@soerenmartius/vue3-clipboard'
+
+
+
 const app = createApp({
     components: {
         LecturaComponent,
+        LecturaShowComponent,
+        LecturaShowAniosComponent,
         ExampleComponent,
+        UrbanizacionComponent,
     }
 });
+// app.use(Toasted);
+
+// app.use(VueSweetalert2);
+app.use(VueClipboard);
 app.mount('#app');
