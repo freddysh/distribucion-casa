@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Image;
+use Org_Heigl\Ghostscript\Ghostscript;
 
 class LecturaController extends Controller
 {
@@ -169,7 +170,7 @@ class LecturaController extends Controller
 
             // en caso de no estar instalado descargar de la web la libreria https://www.ghostscript.com/download/gsdnld.html
             // configurar la ruta donde se instalo gswin64c.exe
-            // Ghostscript::setGsPath("C:\Program Files\gs\gs9.54.0\bin\gswin64c.exe");
+            //Ghostscript::setGsPath("C:\Program Files\gs\gs9.54.0\bin\gswin64c.exe");
 
             $pathToPdf=Storage::disk('lecturas')->path('/').$filename;
             $pathToWhereImageShouldBeStored=Storage::disk('lecturas')->path('/').'lectura_'.$lectura->id;

@@ -21341,9 +21341,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       urbanizacion: "",
       manzana: "",
       lote: "",
-      anioActual: fecha.getFullYear(),
-      periodo_inicio: fecha.getFullYear() - 1,
-      periodo_fin: fecha.getFullYear()
+      anioActual: 2001
+      /*fecha.getFullYear()*/
+      ,
+      periodo_inicio: 2000
+      /*fecha.getFullYear() - 1*/
+      ,
+      periodo_fin: 2001
+      /*fecha.getFullYear()*/
+
     });
 
     var mustBeLearnVue = function mustBeLearnVue(value) {
@@ -21384,8 +21390,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       manzana: "",
       lote: "",
       urbanizacion_id: "0",
-      periodo_inicio: fecha.getFullYear() - 1,
-      periodo_fin: fecha.getFullYear(),
+      periodo_inicio: 2000
+      /*fecha.getFullYear() - 1*/
+      ,
+      periodo_fin: 2001
+      /*fecha.getFullYear()*/
+      ,
       celdas: [{
         nombre: "Primera planta",
         celda_a: "7",
@@ -21647,24 +21657,57 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     }
 
-    function ponerAnio(operacion) {
-      this.v$.$validate();
+    function ponerAnio(_x) {
+      return _ponerAnio.apply(this, arguments);
+    }
 
-      if (!this.v$.$error) {
-        if (operacion == "+") {
-          busqueda.value.anioActual = busqueda.value.anioActual + 2;
-          distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
-          distribucion.value.periodo_fin = busqueda.value.anioActual;
-        } else if (operacion == "-") {
-          busqueda.value.anioActual = busqueda.value.anioActual - 2;
-          distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
-          distribucion.value.periodo_fin = busqueda.value.anioActual;
-        }
-      }
+    function _ponerAnio() {
+      _ponerAnio = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(operacion) {
+        var existe;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                this.v$.$validate();
+                _context.next = 3;
+                return existeLectura();
 
-      this.buscarLectura(); // busqueda.value.anioActual=anioActual.value-1+'/'+anioActual.value
-      // anioAnteriorTexto.value=anioActual.value-2+'/'+anioActual.value-1
-      // anioPosteriorTexto.value=anioActual.value+1+'/'+anioActual.value+2
+              case 3:
+                existe = _context.sent;
+
+                if (existe == 1) {
+                  if (!this.v$.$error) {
+                    if (operacion == "+") {
+                      busqueda.value.anioActual = busqueda.value.anioActual + 2;
+                      distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
+                      distribucion.value.periodo_fin = busqueda.value.anioActual;
+                    } else if (operacion == "-") {
+                      busqueda.value.anioActual = busqueda.value.anioActual - 2;
+                      distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
+                      distribucion.value.periodo_fin = busqueda.value.anioActual;
+                    }
+                  }
+
+                  this.buscarLectura();
+                } else {
+                  sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                    icon: "warning",
+                    title: "Espera!",
+                    text: "Debes ingresar tu distribuci\xF3n para el periodo actual ".concat(distribucion.value.periodo_inicio, "/").concat(distribucion.value.periodo_fin)
+                  });
+                } // busqueda.value.anioActual=anioActual.value-1+'/'+anioActual.value
+                // anioAnteriorTexto.value=anioActual.value-2+'/'+anioActual.value-1
+                // anioPosteriorTexto.value=anioActual.value+1+'/'+anioActual.value+2
+
+
+              case 5:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+      return _ponerAnio.apply(this, arguments);
     }
 
     function getUrbanizaciones() {
@@ -21684,36 +21727,94 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
 
     function _guardar() {
-      _guardar = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        var _this = this;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      _guardar = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        var techados;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
                 this.v$.$validate();
 
-                if (this.v$.$error) {
-                  _context.next = 9;
-                  break;
+                if (!this.v$.$error) {
+                  techados = hay_techados();
+
+                  if (techados) {
+                    guardar_();
+                  } else {
+                    sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+                      title: "No se registran construcciones para este periodo [".concat(distribucion.value.periodo_inicio, "/").concat(distribucion.value.periodo_fin, "], desea continuar?"),
+                      showDenyButton: true,
+                      showCancelButton: true,
+                      confirmButtonText: "Si",
+                      denyButtonText: "No"
+                    }).then(function (result) {
+                      /* Read more about isConfirmed, isDenied below */
+                      if (result.isConfirmed) {
+                        guardar_();
+                      } else if (result.isDenied) {//   Swal.fire("Changes are not saved", "", "info");
+                      }
+                    });
+                  }
                 }
 
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+      return _guardar.apply(this, arguments);
+    }
+
+    function guardar_() {
+      return _guardar_.apply(this, arguments);
+    }
+
+    function _guardar_() {
+      _guardar_ = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
                 console.log("busqueda", busqueda.value);
                 distribucion.value.urbanizacion_id = busqueda.value.urbanizacion;
                 distribucion.value.manzana = busqueda.value.manzana;
                 distribucion.value.lote = busqueda.value.lote;
                 console.log("distribucion antes de guardar", distribucion.value);
-                _context.next = 9;
+                _context3.next = 7;
                 return axios.post("lectura", distribucion.value).then(function (res) {
                   console.log("mensaje", res);
 
                   if (res.data.messaje == 1) {
+                    var actual = new Date().getFullYear();
+                    var inicio = new Date().getFullYear() - 1;
+                    var fin = new Date().getFullYear();
+
+                    if (actual / 2 == 0) {
+                      var _inicio = actual;
+
+                      var _fin = actual + 1;
+                    } else {
+                      var _inicio2 = actual - 1;
+
+                      var _fin2 = actual;
+                    }
+
+                    var mensaje_ultima_lectura = "para obtener tu codigo ingresa tus construcciones hasta el periodo ".concat(inicio, "/").concat(fin);
+
+                    if (distribucion.value.periodo_inicio == inicio && distribucion.value.periodo_fin == fin) {
+                      codigo.value = res.data.codigo;
+                      mensaje_ultima_lectura = "terminaste de ingresar todas tus contrucciones encuentra tu codigo aqui -->!";
+                    }
+
                     console.log("tag", res.data);
-                    codigo.value = res.data.codigo;
                     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                       icon: "success",
                       title: "Buenas noticias",
-                      text: "Lectura guardada satisfactoriamente, encuentra tu codigo aqui -->"
+                      text: "Lectura guardada satisfactoriamente, ".concat(mensaje_ultima_lectura)
                     });
 
                     _this.limpiarForm();
@@ -21721,19 +21822,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                       icon: "error",
                       title: "Opps",
-                      text: "Ocurrió problema, intentelo mas tarde"
+                      text: "No se pudo guardar los datos, por favor vuelva a intentarlo."
                     });
                   }
                 });
 
-              case 9:
+              case 7:
               case "end":
-                return _context.stop();
+                return _context3.stop();
             }
           }
-        }, _callee, this);
+        }, _callee3);
       }));
-      return _guardar.apply(this, arguments);
+      return _guardar_.apply(this, arguments);
     }
 
     function limpiarForm() {
@@ -21756,24 +21857,24 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
 
     function _buscarLectura() {
-      _buscarLectura = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      _buscarLectura = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
         var _this2 = this;
 
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 this.v$.$validate();
 
                 if (this.v$.$error) {
-                  _context2.next = 7;
+                  _context4.next = 7;
                   break;
                 }
 
                 busqueda.value.periodo_inicio = distribucion.value.periodo_inicio;
                 busqueda.value.periodo_fin = distribucion.value.periodo_fin;
                 console.log("busqueda", busqueda.value);
-                _context2.next = 7;
+                _context4.next = 7;
                 return axios.post("lectura-buscar", busqueda.value).then(function (res) {
                   console.log("lectura-buscar", res.data);
                   rpt.value = 0;
@@ -21815,17 +21916,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                       icon: "warning",
                       title: "Opps",
-                      text: "No se encontro registros"
+                      text: "No se registran datos para ".concat(busqueda.value.urbanizacion, " | ").concat(busqueda.value.manzana, " | ").concat(busqueda.value.lote, " en el periodo [").concat(busqueda.value.periodo_inicio, "/").concat(busqueda.value.periodo_fin, "] /n ,por favor coloree la distribuci\xF3n de su vivienda para el periodo indicado.")
                     });
                   }
                 });
 
               case 7:
               case "end":
-                return _context2.stop();
+                return _context4.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee4, this);
       }));
       return _buscarLectura.apply(this, arguments);
     }
@@ -21850,6 +21951,84 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     function mayusculasL(valor) {
       busqueda.value.lote = valor.toUpperCase();
+    }
+
+    function hay_techados() {
+      var valor = 0;
+      distribucion.value.celdas.forEach(function (element) {
+        valor += element.celda_a != "7" ? 1 : 0;
+        valor += element.celda_b != "7" ? 1 : 0;
+        valor += element.celda_c != "7" ? 1 : 0;
+        valor += element.celda_d != "7" ? 1 : 0;
+        valor += element.celda_e != "7" ? 1 : 0;
+        valor += element.celda_f != "7" ? 1 : 0;
+        valor += element.celda_g != "7" ? 1 : 0;
+        valor += element.celda_h != "7" ? 1 : 0;
+        valor += element.celda_i != "7" ? 1 : 0;
+        valor += element.celda_j != "7" ? 1 : 0;
+        valor += element.celda_k != "7" ? 1 : 0;
+        valor += element.celda_l != "7" ? 1 : 0;
+        valor += element.celda_m != "7" ? 1 : 0;
+        valor += element.celda_n != "7" ? 1 : 0;
+        valor += element.celda_o != "7" ? 1 : 0;
+        valor += element.celda_p != "7" ? 1 : 0;
+        valor += element.celda_q != "7" ? 1 : 0;
+        valor += element.celda_r != "7" ? 1 : 0;
+        valor += element.celda_s != "7" ? 1 : 0;
+        valor += element.celda_t != "7" ? 1 : 0;
+        valor += element.celda_u != "7" ? 1 : 0;
+        valor += element.celda_v != "7" ? 1 : 0;
+        valor += element.celda_w != "7" ? 1 : 0;
+        valor += element.celda_x != "7" ? 1 : 0;
+        valor += element.celda_y != "7" ? 1 : 0;
+        valor += element.celda_z != "7" ? 1 : 0;
+        valor += element.celda_aa != "7" ? 1 : 0;
+        valor += element.celda_ab != "7" ? 1 : 0;
+        valor += element.celda_ac != "7" ? 1 : 0;
+        valor += element.celda_ad != "7" ? 1 : 0;
+        valor += element.celda_ae != "7" ? 1 : 0;
+        valor += element.celda_af != "7" ? 1 : 0;
+        valor += element.celda_ag != "7" ? 1 : 0;
+        valor += element.celda_ah != "7" ? 1 : 0;
+        valor += element.celda_ai != "7" ? 1 : 0;
+        valor += element.celda_aj != "7" ? 1 : 0;
+      });
+      return valor;
+    }
+
+    function existeLectura() {
+      return _existeLectura.apply(this, arguments);
+    }
+
+    function _existeLectura() {
+      _existeLectura = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        var valor;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                valor = 0;
+                busqueda.value.periodo_inicio = distribucion.value.periodo_inicio;
+                busqueda.value.periodo_fin = distribucion.value.periodo_fin;
+                console.log("busqueda", busqueda.value);
+                _context5.next = 6;
+                return axios.post("lectura-buscar", busqueda.value).then(function (res) {
+                  if (res.data.rpt == 1) {
+                    valor = 1;
+                  }
+                });
+
+              case 6:
+                return _context5.abrupt("return", valor);
+
+              case 7:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5);
+      }));
+      return _existeLectura.apply(this, arguments);
     }
 
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
@@ -21886,7 +22065,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       copiado: copiado,
       mayusculasM: mayusculasM,
       mayusculasL: mayusculasL,
-      fecha: fecha
+      fecha: fecha,
+      hay_techados: hay_techados,
+      existeLectura: existeLectura
     };
   }
 });

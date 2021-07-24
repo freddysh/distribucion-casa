@@ -441,9 +441,9 @@ export default {
       urbanizacion: "",
       manzana: "",
       lote: "",
-      anioActual: fecha.getFullYear(),
-      periodo_inicio: fecha.getFullYear() - 1,
-      periodo_fin: fecha.getFullYear(),
+      anioActual: 2001 /*fecha.getFullYear()*/,
+      periodo_inicio: 2000 /*fecha.getFullYear() - 1*/,
+      periodo_fin: 2001 /*fecha.getFullYear()*/,
     });
     const mustBeLearnVue = (value) => value.includes("learnvue");
     const rulesBusqueda = computed(() => {
@@ -462,8 +462,8 @@ export default {
       manzana: "",
       lote: "",
       urbanizacion_id: "0",
-      periodo_inicio: fecha.getFullYear() - 1,
-      periodo_fin: fecha.getFullYear(),
+      periodo_inicio: 2000 /*fecha.getFullYear() - 1*/,
+      periodo_fin: 2001 /*fecha.getFullYear()*/,
       celdas: [
         {
           nombre: "Primera planta",
@@ -725,20 +725,29 @@ export default {
         return fila.id == id ? fila.color : "";
       });
     }
-    function ponerAnio(operacion) {
+    async function ponerAnio(operacion) {
       this.v$.$validate();
-      if (!this.v$.$error) {
-        if (operacion == "+") {
-          busqueda.value.anioActual = busqueda.value.anioActual + 2;
-          distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
-          distribucion.value.periodo_fin = busqueda.value.anioActual;
-        } else if (operacion == "-") {
-          busqueda.value.anioActual = busqueda.value.anioActual - 2;
-          distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
-          distribucion.value.periodo_fin = busqueda.value.anioActual;
+      let existe = await existeLectura();
+      if (existe == 1) {
+        if (!this.v$.$error) {
+          if (operacion == "+") {
+            busqueda.value.anioActual = busqueda.value.anioActual + 2;
+            distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
+            distribucion.value.periodo_fin = busqueda.value.anioActual;
+          } else if (operacion == "-") {
+            busqueda.value.anioActual = busqueda.value.anioActual - 2;
+            distribucion.value.periodo_inicio = busqueda.value.anioActual - 1;
+            distribucion.value.periodo_fin = busqueda.value.anioActual;
+          }
         }
+        this.buscarLectura();
+      } else {
+        Swal.fire({
+          icon: "warning",
+          title: "Espera!",
+          text: `Debes ingresar tu distribución para el periodo actual ${distribucion.value.periodo_inicio}/${distribucion.value.periodo_fin}`,
+        });
       }
-      this.buscarLectura();
       // busqueda.value.anioActual=anioActual.value-1+'/'+anioActual.value
       // anioAnteriorTexto.value=anioActual.value-2+'/'+anioActual.value-1
       // anioPosteriorTexto.value=anioActual.value+1+'/'+anioActual.value+2
@@ -756,32 +765,70 @@ export default {
     async function guardar() {
       this.v$.$validate();
       if (!this.v$.$error) {
-        console.log("busqueda", busqueda.value);
-        distribucion.value.urbanizacion_id = busqueda.value.urbanizacion;
-        distribucion.value.manzana = busqueda.value.manzana;
-        distribucion.value.lote = busqueda.value.lote;
-        console.log("distribucion antes de guardar", distribucion.value);
-
-        await axios.post(`lectura`, distribucion.value).then((res) => {
-          console.log("mensaje", res);
-          if (res.data.messaje == 1) {
-            console.log("tag", res.data);
-            codigo.value = res.data.codigo;
-            Swal.fire({
-              icon: "success",
-              title: "Buenas noticias",
-              text: "Lectura guardada satisfactoriamente, encuentra tu codigo aqui -->",
-            });
-            this.limpiarForm();
-          } else {
-            Swal.fire({
-              icon: "error",
-              title: "Opps",
-              text: "Ocurrió problema, intentelo mas tarde",
-            });
-          }
-        });
+        let techados = hay_techados();
+        if (techados) {
+          guardar_();
+        } else {
+          Swal.fire({
+            title: `No se registran construcciones para este periodo [${distribucion.value.periodo_inicio}/${distribucion.value.periodo_fin}], desea continuar?`,
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: `Si`,
+            denyButtonText: `No`,
+          }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+              guardar_();
+            } else if (result.isDenied) {
+              //   Swal.fire("Changes are not saved", "", "info");
+            }
+          });
+        }
       }
+    }
+    async function guardar_() {
+      console.log("busqueda", busqueda.value);
+      distribucion.value.urbanizacion_id = busqueda.value.urbanizacion;
+      distribucion.value.manzana = busqueda.value.manzana;
+      distribucion.value.lote = busqueda.value.lote;
+      console.log("distribucion antes de guardar", distribucion.value);
+      await axios.post(`lectura`, distribucion.value).then((res) => {
+        console.log("mensaje", res);
+        if (res.data.messaje == 1) {
+          let actual = new Date().getFullYear();
+          let inicio = new Date().getFullYear() - 1;
+          let fin = new Date().getFullYear();
+          if (actual / 2 == 0) {
+            let inicio = actual;
+            let fin = actual + 1;
+          } else {
+            let inicio = actual - 1;
+            let fin = actual;
+          }
+          let mensaje_ultima_lectura = `para obtener tu codigo ingresa tus construcciones hasta el periodo ${inicio}/${fin}`;
+          if (
+            distribucion.value.periodo_inicio == inicio &&
+            distribucion.value.periodo_fin == fin
+          ) {
+            codigo.value = res.data.codigo;
+            mensaje_ultima_lectura =
+              "terminaste de ingresar todas tus contrucciones encuentra tu codigo aqui -->!";
+          }
+          console.log("tag", res.data);
+          Swal.fire({
+            icon: "success",
+            title: "Buenas noticias",
+            text: `Lectura guardada satisfactoriamente, ${mensaje_ultima_lectura}`,
+          });
+          this.limpiarForm();
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Opps",
+            text: `No se pudo guardar los datos, por favor vuelva a intentarlo.`,
+          });
+        }
+      });
     }
     function limpiarForm() {
       console.log("limpieza", "inicio");
@@ -855,7 +902,7 @@ export default {
             Swal.fire({
               icon: "warning",
               title: "Opps",
-              text: "No se encontro registros",
+              text: `No se registran datos para ${busqueda.value.urbanizacion} | ${busqueda.value.manzana} | ${busqueda.value.lote} en el periodo [${busqueda.value.periodo_inicio}/${busqueda.value.periodo_fin}] /n ,por favor coloree la distribución de su vivienda para el periodo indicado.`,
             });
           }
         });
@@ -877,6 +924,62 @@ export default {
     }
     function mayusculasL(valor) {
       busqueda.value.lote = valor.toUpperCase();
+    }
+    function hay_techados() {
+      let valor = 0;
+      distribucion.value.celdas.forEach((element) => {
+        valor += element.celda_a != "7" ? 1 : 0;
+        valor += element.celda_b != "7" ? 1 : 0;
+        valor += element.celda_c != "7" ? 1 : 0;
+        valor += element.celda_d != "7" ? 1 : 0;
+        valor += element.celda_e != "7" ? 1 : 0;
+        valor += element.celda_f != "7" ? 1 : 0;
+        valor += element.celda_g != "7" ? 1 : 0;
+        valor += element.celda_h != "7" ? 1 : 0;
+        valor += element.celda_i != "7" ? 1 : 0;
+        valor += element.celda_j != "7" ? 1 : 0;
+        valor += element.celda_k != "7" ? 1 : 0;
+        valor += element.celda_l != "7" ? 1 : 0;
+        valor += element.celda_m != "7" ? 1 : 0;
+        valor += element.celda_n != "7" ? 1 : 0;
+        valor += element.celda_o != "7" ? 1 : 0;
+        valor += element.celda_p != "7" ? 1 : 0;
+        valor += element.celda_q != "7" ? 1 : 0;
+        valor += element.celda_r != "7" ? 1 : 0;
+        valor += element.celda_s != "7" ? 1 : 0;
+        valor += element.celda_t != "7" ? 1 : 0;
+        valor += element.celda_u != "7" ? 1 : 0;
+        valor += element.celda_v != "7" ? 1 : 0;
+        valor += element.celda_w != "7" ? 1 : 0;
+        valor += element.celda_x != "7" ? 1 : 0;
+        valor += element.celda_y != "7" ? 1 : 0;
+        valor += element.celda_z != "7" ? 1 : 0;
+        valor += element.celda_aa != "7" ? 1 : 0;
+        valor += element.celda_ab != "7" ? 1 : 0;
+        valor += element.celda_ac != "7" ? 1 : 0;
+        valor += element.celda_ad != "7" ? 1 : 0;
+        valor += element.celda_ae != "7" ? 1 : 0;
+        valor += element.celda_af != "7" ? 1 : 0;
+        valor += element.celda_ag != "7" ? 1 : 0;
+        valor += element.celda_ah != "7" ? 1 : 0;
+        valor += element.celda_ai != "7" ? 1 : 0;
+        valor += element.celda_aj != "7" ? 1 : 0;
+      });
+      return valor;
+    }
+    async function existeLectura() {
+      let valor = 0;
+      busqueda.value.periodo_inicio = distribucion.value.periodo_inicio;
+      busqueda.value.periodo_fin = distribucion.value.periodo_fin;
+
+      console.log("busqueda", busqueda.value);
+
+      await axios.post(`lectura-buscar`, busqueda.value).then((res) => {
+        if (res.data.rpt == 1) {
+          valor = 1;
+        }
+      });
+      return valor;
     }
     onMounted(() => {
       //   this.moment = moment;
@@ -913,6 +1016,8 @@ export default {
       mayusculasM,
       mayusculasL,
       fecha,
+      hay_techados,
+      existeLectura,
     };
   },
 };
