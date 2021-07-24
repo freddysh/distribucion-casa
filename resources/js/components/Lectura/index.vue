@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-header">
-        <h2>Distribucion de su casa {{ busqueda.anioActual }}</h2>
+        <h2>Distribucion de su casa </h2>
       </div>
       <div class="card-body">
         <div class="row">
