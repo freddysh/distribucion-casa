@@ -149,6 +149,24 @@ class LecturaController extends Controller
                 $celdita->celda_ah=$celda['celda_ah']?$celda['celda_ah']:'';
                 $celdita->celda_ai=$celda['celda_ai']?$celda['celda_ai']:'';
                 $celdita->celda_aj=$celda['celda_aj']?$celda['celda_aj']:'';
+                $celdita->celda_ak=$celda['celda_ak']?$celda['celda_ak']:'';
+                $celdita->celda_al=$celda['celda_al']?$celda['celda_al']:'';
+                $celdita->celda_am=$celda['celda_am']?$celda['celda_am']:'';
+                $celdita->celda_an=$celda['celda_an']?$celda['celda_an']:'';
+                $celdita->celda_ao=$celda['celda_ao']?$celda['celda_ao']:'';
+                $celdita->celda_ap=$celda['celda_ap']?$celda['celda_ap']:'';
+                $celdita->celda_aq=$celda['celda_aq']?$celda['celda_aq']:'';
+                $celdita->celda_ar=$celda['celda_ar']?$celda['celda_ar']:'';
+                $celdita->celda_as=$celda['celda_as']?$celda['celda_as']:'';
+                $celdita->celda_at=$celda['celda_at']?$celda['celda_at']:'';
+                $celdita->celda_au=$celda['celda_au']?$celda['celda_au']:'';
+                $celdita->celda_av=$celda['celda_av']?$celda['celda_av']:'';
+                $celdita->celda_aw=$celda['celda_aw']?$celda['celda_aw']:'';
+                $celdita->celda_ax=$celda['celda_ax']?$celda['celda_ax']:'';
+                $celdita->celda_ay=$celda['celda_ay']?$celda['celda_ay']:'';
+                $celdita->celda_az=$celda['celda_az']?$celda['celda_az']:'';
+                $celdita->celda_aaa=$celda['celda_aaa']?$celda['celda_aaa']:'';
+                $celdita->celda_aab=$celda['celda_aab']?$celda['celda_aab']:'';
                 $celdita->lectura_id=$lectura->id;
                 $celdita->save();
             }
@@ -180,7 +198,7 @@ class LecturaController extends Controller
 
             $img = Image::make($pathToWhereImageShouldBeStored.'.jpeg');
             // crop image
-            $img->crop(1000, 400, 50, 80);
+            $img->crop(1000, 600, 50, 80);
             // $img->resize(230, 125);
             $img->save($pathToWhereImageShouldBeStored.'.jpeg');
             Storage::disk('lecturas')->delete($filename);
@@ -245,6 +263,24 @@ class LecturaController extends Controller
                 $salsa_comedor.=$celda->celda_ah==$espacio->id?'P'.($key1+1).'_celdaAH,':'';
                 $salsa_comedor.=$celda->celda_ai==$espacio->id?'P'.($key1+1).'_celdaAI,':'';
                 $salsa_comedor.=$celda->celda_aj==$espacio->id?'P'.($key1+1).'_celdaAJ,':'';
+                $salsa_comedor.=$celda->celda_ak==$espacio->id?'P'.($key1+1).'_celdaAK,':'';
+                $salsa_comedor.=$celda->celda_al==$espacio->id?'P'.($key1+1).'_celdaAL,':'';
+                $salsa_comedor.=$celda->celda_am==$espacio->id?'P'.($key1+1).'_celdaAM,':'';
+                $salsa_comedor.=$celda->celda_an==$espacio->id?'P'.($key1+1).'_celdaAN,':'';
+                $salsa_comedor.=$celda->celda_ao==$espacio->id?'P'.($key1+1).'_celdaAO,':'';
+                $salsa_comedor.=$celda->celda_ap==$espacio->id?'P'.($key1+1).'_celdaAP,':'';
+                $salsa_comedor.=$celda->celda_aq==$espacio->id?'P'.($key1+1).'_celdaAQ,':'';
+                $salsa_comedor.=$celda->celda_ar==$espacio->id?'P'.($key1+1).'_celdaAR,':'';
+                $salsa_comedor.=$celda->celda_as==$espacio->id?'P'.($key1+1).'_celdaAS,':'';
+                $salsa_comedor.=$celda->celda_at==$espacio->id?'P'.($key1+1).'_celdaAT,':'';
+                $salsa_comedor.=$celda->celda_au==$espacio->id?'P'.($key1+1).'_celdaAU,':'';
+                $salsa_comedor.=$celda->celda_av==$espacio->id?'P'.($key1+1).'_celdaAV,':'';
+                $salsa_comedor.=$celda->celda_aw==$espacio->id?'P'.($key1+1).'_celdaAW,':'';
+                $salsa_comedor.=$celda->celda_ax==$espacio->id?'P'.($key1+1).'_celdaAX,':'';
+                $salsa_comedor.=$celda->celda_ay==$espacio->id?'P'.($key1+1).'_celdaAY,':'';
+                $salsa_comedor.=$celda->celda_az==$espacio->id?'P'.($key1+1).'_celdaAZ,':'';
+                $salsa_comedor.=$celda->celda_aaa==$espacio->id?'P'.($key1+1).'_celdaAAA,':'';
+                $salsa_comedor.=$celda->celda_aaa==$espacio->id?'P'.($key1+1).'_celdaAAB,':'';
                 }
                 $arreglo[strval($espacio->id)][]=$salsa_comedor;
             }
@@ -256,8 +292,6 @@ class LecturaController extends Controller
     }
     public function reporte_lecturas_api_anios(){
         $lecturas=Lectura::get()->groupBy('periodo_fin');
-        // $lecturas=Lectura::get();
-    // return $lecturas;
 
         $arreglo=[];
         foreach ($lecturas as $key => $value) {
@@ -278,13 +312,9 @@ class LecturaController extends Controller
         //return $casas;
         foreach ($casas as $key2 => $casa) {
             foreach ($arreglo as $key => $value) {
-
                 if(!array_key_exists($casa->codigo,$value)){
-
                     $arreglo[$key][$casa->codigo]='';
                 }
-                // ksort($value);
-                // $arregloSort[$key]=$value;
             }
         }
         foreach ($arreglo as $key => $value) {

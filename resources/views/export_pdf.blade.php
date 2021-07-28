@@ -205,6 +205,84 @@
                             >
                             </td>
                         </tr>
+                        <tr>
+                            <td
+                            class="{{ $celda->celda_ak>0?$espacios[$celda->celda_ak]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_al>0?$espacios[$celda->celda_al]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_am>0?$espacios[$celda->celda_am]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_an>0?$espacios[$celda->celda_an]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_ao>0?$espacios[$celda->celda_ao]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_ap>0?$espacios[$celda->celda_ap]:''}}"
+                            >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                            class="{{ $celda->celda_aq>0?$espacios[$celda->celda_aq]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_ar>0?$espacios[$celda->celda_ar]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_as>0?$espacios[$celda->celda_as]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_at>0?$espacios[$celda->celda_at]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_au>0?$espacios[$celda->celda_au]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_av>0?$espacios[$celda->celda_av]:''}}"
+                            >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td
+                            class="{{ $celda->celda_aw>0?$espacios[$celda->celda_aw]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_ax>0?$espacios[$celda->celda_ax]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_ay>0?$espacios[$celda->celda_ay]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_az>0?$espacios[$celda->celda_az]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_aaa>0?$espacios[$celda->celda_aaa]:''}}"
+                            >
+                            </td>
+                            <td
+                            class="{{ $celda->celda_aab>0?$espacios[$celda->celda_aab]:''}}"
+                            >
+                            </td>
+                        </tr>
                     </table>
                 </td>
             @endforeach

@@ -295,6 +295,84 @@
                           :class="mostrarValor(celda.celda_aj)"
                         ></td>
                       </tr>
+                      <tr>
+                        <td
+                          @click="asignarColor('celda_ak',index)"
+                          :class="mostrarValor(celda.celda_ak)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_al',index)"
+                          :class="mostrarValor(celda.celda_al)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_am',index)"
+                          :class="mostrarValor(celda.celda_am)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_an',index)"
+                          :class="mostrarValor(celda.celda_an)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ao',index)"
+                          :class="mostrarValor(celda.celda_ao)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ap',index)"
+                          :class="mostrarValor(celda.celda_ap)"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td
+                          @click="asignarColor('celda_aq',index)"
+                          :class="mostrarValor(celda.celda_aq)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ar',index)"
+                          :class="mostrarValor(celda.celda_ar)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_as',index)"
+                          :class="mostrarValor(celda.celda_as)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_at',index)"
+                          :class="mostrarValor(celda.celda_at)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_au',index)"
+                          :class="mostrarValor(celda.celda_au)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_av',index)"
+                          :class="mostrarValor(celda.celda_av)"
+                        ></td>
+                      </tr>
+                      <tr>
+                        <td
+                          @click="asignarColor('celda_aw',index)"
+                          :class="mostrarValor(celda.celda_aw)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ax',index)"
+                          :class="mostrarValor(celda.celda_ax)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_ay',index)"
+                          :class="mostrarValor(celda.celda_ay)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_az',index)"
+                          :class="mostrarValor(celda.celda_az)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_aaa',index)"
+                          :class="mostrarValor(celda.celda_aaa)"
+                        ></td>
+                        <td
+                          @click="asignarColor('celda_aab',index)"
+                          :class="mostrarValor(celda.celda_aab)"
+                        ></td>
+                      </tr>
                     </table>
                     <div class="row">
                       <div class="text-center col-12">
@@ -503,6 +581,24 @@ export default {
           celda_ah: "7",
           celda_ai: "7",
           celda_aj: "7",
+          celda_ak: "7",
+          celda_al: "7",
+          celda_am: "7",
+          celda_an: "7",
+          celda_ao: "7",
+          celda_ap: "7",
+          celda_aq: "7",
+          celda_ar: "7",
+          celda_as: "7",
+          celda_at: "7",
+          celda_au: "7",
+          celda_av: "7",
+          celda_aw: "7",
+          celda_ax: "7",
+          celda_ay: "7",
+          celda_az: "7",
+          celda_aaa: "7",
+          celda_aab: "7",
         },
         {
           nombre: "Segunda planta",
@@ -542,6 +638,24 @@ export default {
           celda_ah: "7",
           celda_ai: "7",
           celda_aj: "7",
+          celda_ak: "7",
+          celda_al: "7",
+          celda_am: "7",
+          celda_an: "7",
+          celda_ao: "7",
+          celda_ap: "7",
+          celda_aq: "7",
+          celda_ar: "7",
+          celda_as: "7",
+          celda_at: "7",
+          celda_au: "7",
+          celda_av: "7",
+          celda_aw: "7",
+          celda_ax: "7",
+          celda_ay: "7",
+          celda_az: "7",
+          celda_aaa: "7",
+          celda_aab: "7",
         },
         {
           nombre: "Tercera planta",
@@ -581,6 +695,24 @@ export default {
           celda_ah: "7",
           celda_ai: "7",
           celda_aj: "7",
+          celda_ak: "7",
+          celda_al: "7",
+          celda_am: "7",
+          celda_an: "7",
+          celda_ao: "7",
+          celda_ap: "7",
+          celda_aq: "7",
+          celda_ar: "7",
+          celda_as: "7",
+          celda_at: "7",
+          celda_au: "7",
+          celda_av: "7",
+          celda_aw: "7",
+          celda_ax: "7",
+          celda_ay: "7",
+          celda_az: "7",
+          celda_aaa: "7",
+          celda_aab: "7",
         },
       ],
     });
@@ -624,6 +756,24 @@ export default {
           celda_ah: "7",
           celda_ai: "7",
           celda_aj: "7",
+          celda_ak: "7",
+          celda_al: "7",
+          celda_am: "7",
+          celda_an: "7",
+          celda_ao: "7",
+          celda_ap: "7",
+          celda_aq: "7",
+          celda_ar: "7",
+          celda_as: "7",
+          celda_at: "7",
+          celda_au: "7",
+          celda_av: "7",
+          celda_aw: "7",
+          celda_ax: "7",
+          celda_ay: "7",
+          celda_az: "7",
+          celda_aaa: "7",
+          celda_aab: "7",
         },
         {
           nombre: "Segunda planta",
@@ -663,6 +813,24 @@ export default {
           celda_ah: "7",
           celda_ai: "7",
           celda_aj: "7",
+          celda_ak: "7",
+          celda_al: "7",
+          celda_am: "7",
+          celda_an: "7",
+          celda_ao: "7",
+          celda_ap: "7",
+          celda_aq: "7",
+          celda_ar: "7",
+          celda_as: "7",
+          celda_at: "7",
+          celda_au: "7",
+          celda_av: "7",
+          celda_aw: "7",
+          celda_ax: "7",
+          celda_ay: "7",
+          celda_az: "7",
+          celda_aaa: "7",
+          celda_aab: "7",
         },
         {
           nombre: "Tercera planta",
@@ -702,6 +870,24 @@ export default {
           celda_ah: "7",
           celda_ai: "7",
           celda_aj: "7",
+          celda_ak: "7",
+          celda_al: "7",
+          celda_am: "7",
+          celda_an: "7",
+          celda_ao: "7",
+          celda_ap: "7",
+          celda_aq: "7",
+          celda_ar: "7",
+          celda_as: "7",
+          celda_at: "7",
+          celda_au: "7",
+          celda_av: "7",
+          celda_aw: "7",
+          celda_ax: "7",
+          celda_ay: "7",
+          celda_az: "7",
+          celda_aaa: "7",
+          celda_aab: "7",
         },
       ];
     }
@@ -716,9 +902,14 @@ export default {
     }
     function asignarColor(celdaPicada, index) {
       if (!espacio.value.id) {
-        alert("Escoja un color de la lista");
+        Swal.fire({
+          icon: "warning",
+          title: "Opps!",
+          text: `Escoje un color de la lista`,
+        });
+      } else {
+        distribucion.value.celdas[index][celdaPicada] = espacio.value.id;
       }
-      distribucion.value.celdas[index][celdaPicada] = espacio.value.id;
     }
     function mostrarValor(id) {
       return espacios.value.map((fila) => {
@@ -820,7 +1011,7 @@ export default {
             title: "Buenas noticias",
             text: `Lectura guardada satisfactoriamente, ${mensaje_ultima_lectura}`,
           });
-          this.limpiarForm();
+          limpiarForm();
         } else {
           Swal.fire({
             icon: "error",

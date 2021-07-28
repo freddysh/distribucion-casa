@@ -21433,7 +21433,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         celda_ag: "7",
         celda_ah: "7",
         celda_ai: "7",
-        celda_aj: "7"
+        celda_aj: "7",
+        celda_ak: "7",
+        celda_al: "7",
+        celda_am: "7",
+        celda_an: "7",
+        celda_ao: "7",
+        celda_ap: "7",
+        celda_aq: "7",
+        celda_ar: "7",
+        celda_as: "7",
+        celda_at: "7",
+        celda_au: "7",
+        celda_av: "7",
+        celda_aw: "7",
+        celda_ax: "7",
+        celda_ay: "7",
+        celda_az: "7",
+        celda_aaa: "7",
+        celda_aab: "7"
       }, {
         nombre: "Segunda planta",
         celda_a: "7",
@@ -21471,7 +21489,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         celda_ag: "7",
         celda_ah: "7",
         celda_ai: "7",
-        celda_aj: "7"
+        celda_aj: "7",
+        celda_ak: "7",
+        celda_al: "7",
+        celda_am: "7",
+        celda_an: "7",
+        celda_ao: "7",
+        celda_ap: "7",
+        celda_aq: "7",
+        celda_ar: "7",
+        celda_as: "7",
+        celda_at: "7",
+        celda_au: "7",
+        celda_av: "7",
+        celda_aw: "7",
+        celda_ax: "7",
+        celda_ay: "7",
+        celda_az: "7",
+        celda_aaa: "7",
+        celda_aab: "7"
       }, {
         nombre: "Tercera planta",
         celda_a: "7",
@@ -21509,7 +21545,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         celda_ag: "7",
         celda_ah: "7",
         celda_ai: "7",
-        celda_aj: "7"
+        celda_aj: "7",
+        celda_ak: "7",
+        celda_al: "7",
+        celda_am: "7",
+        celda_an: "7",
+        celda_ao: "7",
+        celda_ap: "7",
+        celda_aq: "7",
+        celda_ar: "7",
+        celda_as: "7",
+        celda_at: "7",
+        celda_au: "7",
+        celda_av: "7",
+        celda_aw: "7",
+        celda_ax: "7",
+        celda_ay: "7",
+        celda_az: "7",
+        celda_aaa: "7",
+        celda_aab: "7"
       }]
     });
 
@@ -21551,7 +21605,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         celda_ag: "7",
         celda_ah: "7",
         celda_ai: "7",
-        celda_aj: "7"
+        celda_aj: "7",
+        celda_ak: "7",
+        celda_al: "7",
+        celda_am: "7",
+        celda_an: "7",
+        celda_ao: "7",
+        celda_ap: "7",
+        celda_aq: "7",
+        celda_ar: "7",
+        celda_as: "7",
+        celda_at: "7",
+        celda_au: "7",
+        celda_av: "7",
+        celda_aw: "7",
+        celda_ax: "7",
+        celda_ay: "7",
+        celda_az: "7",
+        celda_aaa: "7",
+        celda_aab: "7"
       }, {
         nombre: "Segunda planta",
         celda_a: "7",
@@ -21589,7 +21661,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         celda_ag: "7",
         celda_ah: "7",
         celda_ai: "7",
-        celda_aj: "7"
+        celda_aj: "7",
+        celda_ak: "7",
+        celda_al: "7",
+        celda_am: "7",
+        celda_an: "7",
+        celda_ao: "7",
+        celda_ap: "7",
+        celda_aq: "7",
+        celda_ar: "7",
+        celda_as: "7",
+        celda_at: "7",
+        celda_au: "7",
+        celda_av: "7",
+        celda_aw: "7",
+        celda_ax: "7",
+        celda_ay: "7",
+        celda_az: "7",
+        celda_aaa: "7",
+        celda_aab: "7"
       }, {
         nombre: "Tercera planta",
         celda_a: "7",
@@ -21627,7 +21717,25 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         celda_ag: "7",
         celda_ah: "7",
         celda_ai: "7",
-        celda_aj: "7"
+        celda_aj: "7",
+        celda_ak: "7",
+        celda_al: "7",
+        celda_am: "7",
+        celda_an: "7",
+        celda_ao: "7",
+        celda_ap: "7",
+        celda_aq: "7",
+        celda_ar: "7",
+        celda_as: "7",
+        celda_at: "7",
+        celda_au: "7",
+        celda_av: "7",
+        celda_aw: "7",
+        celda_ax: "7",
+        celda_ay: "7",
+        celda_az: "7",
+        celda_aaa: "7",
+        celda_aab: "7"
       }];
     }
 
@@ -21645,10 +21753,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     function asignarColor(celdaPicada, index) {
       if (!espacio.value.id) {
-        alert("Escoja un color de la lista");
+        sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
+          icon: "warning",
+          title: "Opps!",
+          text: "Escoje un color de la lista"
+        });
+      } else {
+        distribucion.value.celdas[index][celdaPicada] = espacio.value.id;
       }
-
-      distribucion.value.celdas[index][celdaPicada] = espacio.value.id;
     }
 
     function mostrarValor(id) {
@@ -21773,8 +21885,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     function _guardar_() {
       _guardar_ = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-        var _this = this;
-
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -21816,8 +21926,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                       title: "Buenas noticias",
                       text: "Lectura guardada satisfactoriamente, ".concat(mensaje_ultima_lectura)
                     });
-
-                    _this.limpiarForm();
+                    limpiarForm();
                   } else {
                     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                       icon: "error",
@@ -21858,7 +21967,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     function _buscarLectura() {
       _buscarLectura = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-        var _this2 = this;
+        var _this = this;
 
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
           while (1) {
@@ -21880,7 +21989,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   rpt.value = 0;
                   distribucion.value.id = 0;
 
-                  _this2.celdasVacias();
+                  _this.celdasVacias();
 
                   if (res.data.rpt >= 1) {
                     if (res.data.rpt == 1) {
@@ -21911,7 +22020,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     rpt.value = 0;
                     distribucion.value.id = 0;
 
-                    _this2.celdasVacias();
+                    _this.celdasVacias();
 
                     sweetalert2__WEBPACK_IMPORTED_MODULE_2___default().fire({
                       icon: "warning",
@@ -23008,6 +23117,132 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return $setup.asignarColor('celda_aj', index);
       },
       "class": $setup.mostrarValor(celda.celda_aj)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_ak', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_ak)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_al', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_al)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_am', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_am)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_an', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_an)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_ao', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_ao)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_ap', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_ap)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_aq', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_aq)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_ar', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_ar)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_as', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_as)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_at', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_at)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_au', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_au)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_av', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_av)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_aw', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_aw)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_ax', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_ax)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_ay', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_ay)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_az', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_az)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_aaa', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_aaa)
+    }, null, 10
+    /* CLASS, PROPS */
+    , ["onClick"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("td", {
+      onClick: function onClick($event) {
+        return $setup.asignarColor('celda_aab', index);
+      },
+      "class": $setup.mostrarValor(celda.celda_aab)
     }, null, 10
     /* CLASS, PROPS */
     , ["onClick"])])]), _hoisted_37]);
