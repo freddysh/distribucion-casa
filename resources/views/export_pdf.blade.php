@@ -65,7 +65,7 @@
                             >
                             </td>
                             <td
-                            class="{{ $celda->celda_e>0?$espacios[$celda->celda_f]:''}}"
+                            class="{{ $celda->celda_e>0?$espacios[$celda->celda_e]:''}}"
                             >
                             </td>
                             <td

@@ -44,9 +44,9 @@ class DatabaseSeeder extends Seeder
 
         $espacio6=new Espacio();
         $espacio6->nombre='Otro (techado)';
-        $espacio6->color='bg-dark';
-        $espacio6->save();    
-        
+        $espacio6->color='bg-purple';
+        $espacio6->save();
+
         $espacio7=new Espacio();
         $espacio7->nombre='Otro/Ninguno (sin techar)';
         $espacio7->color='bg-warning';
