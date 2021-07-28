@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <div class="card-header">
-        <h2>Distribucion de su casa </h2>
+        <h2>Distribucion de su casa</h2>
       </div>
       <div class="card-body">
         <div class="row">
@@ -1216,6 +1216,6 @@ export default {
 <style>
 table tr td {
   width: 35px;
-  height: 40px;
+  height: 35px;
 }
 </style>
