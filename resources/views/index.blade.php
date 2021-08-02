@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('tutorial')
 <a
 class="btn btn-sm btn-danger"
