@@ -3,7 +3,7 @@
 @section('tutorial')
 <a
 class="btn btn-sm btn-danger"
-href="https://www.youtube.com/watch?v=L-P44lyqKB8&ab_channel=SergioEdgarMauricioPocoAguilar"
+href="https://www.youtube.com/watch?v=uEqZmNqwc6I"
 target="_blank"
 rel="tutorial"
 ><svg
